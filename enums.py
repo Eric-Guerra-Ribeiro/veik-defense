@@ -17,3 +17,11 @@ class Unit(enum.Enum):
     INFANTRY = enum.auto()
     ARMORED = enum.auto()
     AIR_FORCE = enum.auto()
+
+
+class GameState(enum.Enum):
+    """
+    Enum class for the states of the game.
+    """
+    MENU = enum.auto()
+    PLAYING = enum.auto()
