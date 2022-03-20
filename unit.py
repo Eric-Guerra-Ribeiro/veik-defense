@@ -79,3 +79,16 @@ class Unit(abc.ABC):
         Returns the unit type
         """
         return self.unit_type
+
+
+class Infantry(Unit):
+    """
+    Basic infantry unit
+    """
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.max_health = gc.BASE_HEALTH
+        self.health = self.max_health
+        self.speed = gc.BASE_SPEED
+        self.armor = gc.BASE_ARMOR
+        self.unit_type = enums.Unit.INFANTRY
