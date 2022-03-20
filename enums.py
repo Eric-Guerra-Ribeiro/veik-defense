@@ -10,3 +10,10 @@ class Terrain(enum.Enum):
     ENEMY_CAMP = enum.auto()
 
 
+class Unit(enum.Enum):
+    """
+    Enum calss for the types of military units.
+    """
+    INFANTRY = enum.auto()
+    ARMORED = enum.auto()
+    AIR_FORCE = enum.auto()
