@@ -1,5 +1,6 @@
 import enum
 
+
 class Terrain(enum.Enum):
     """
     Enum class for the types of terrain.
@@ -12,11 +13,18 @@ class Terrain(enum.Enum):
 
 class Unit(enum.Enum):
     """
-    Enum calss for the types of military units.
+    Enum class for the types of military units.
     """
     INFANTRY = enum.auto()
     ARMORED = enum.auto()
     AIR_FORCE = enum.auto()
+
+
+class Tower(enum.Enum):
+    """
+    Enum class for the types of towers.
+    """
+    MACHINE_GUN = enum.auto()
 
 
 class GameState(enum.Enum):

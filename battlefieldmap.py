@@ -1,3 +1,4 @@
+from chess import BB_FILE_MASKS
 import enums
 import gameconstants as gc
 import utils
@@ -69,3 +70,14 @@ class BattleFieldMap:
         Returns the position of an enemy camp.
         """
         return self.enemy_camp_pos
+    
+    def is_grass_square(self, point, n):
+        """
+        Returns if a square of size n of max coordinates pos is in grass
+        """
+        for x in range(point[0] - n, point[0] + 1):
+            for y in range(point[1] - n, point[1] + 1):
+                pos = (x,y)
+                if self.get_terrain(pos) != enums.Terrain.GRASS:
+                    return False
+        return True
