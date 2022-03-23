@@ -71,12 +71,12 @@ class BattleFieldMap:
         """
         return self.enemy_camp_pos
     
-    def is_grass_square(self, point, n):
+    def is_grass_square(self, left, top, n):
         """
-        Returns if a square of size n of max coordinates pos is in grass
+        Returns if a square of size n is in grass
         """
-        for x in range(point[0] - n, point[0] + 1):
-            for y in range(point[1] - n, point[1] + 1):
+        for x in range(left, left + n + 1):
+            for y in range(top, top + n + 1):
                 pos = (x,y)
                 if self.get_terrain(pos) != enums.Terrain.GRASS:
                     return False
