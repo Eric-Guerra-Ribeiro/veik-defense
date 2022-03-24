@@ -18,15 +18,7 @@ class GameController:
         for troop in self.units:
             troop.move()
         for tower in self.towers:
-            target = tower.target
-            if target is not None:
-                if tower.in_range(target.cur_pos):
-                        target = None
-            if target is None:
-                for troop in self.units:
-                    if tower.in_range(troop.cur_pos):
-                        tower.target = troop
-                        break
+            tower.find_target(self.units)
             tower.shoot()
 
 
@@ -36,7 +28,7 @@ class GameController:
 
     def spawn_tower(self):
         # Temporary function for testing TODO Remove this function
-        self.towers.append(tower.MachineGun(self.bf_map, (5,4)))
+        self.towers.append(tower.MachineGun(self.bf_map, (2,1)))
 
     def get_map(self):
         """

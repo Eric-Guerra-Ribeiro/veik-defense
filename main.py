@@ -14,6 +14,8 @@ def main():
     game = gamecontroller.GameController()
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
     arts = art.Art(screen, game)
+     #TODO: Change this
+    game.spawn_tower()
     while game.is_running():
         clock.tick(pgc.FREQUENCY)
         arts.draw()
