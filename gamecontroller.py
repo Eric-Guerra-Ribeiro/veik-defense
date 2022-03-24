@@ -15,8 +15,11 @@ class GameController:
 
     def run(self):
         # Temporary function for testing TODO remove or improve
-        for troop in self.units:
-            troop.move()
+        for index, troop in enumerate(self.units):
+            if not troop.alive:
+                del self.units[index]
+            else:
+                troop.move()
         for tower in self.towers:
             tower.find_target(self.units)
             tower.shoot()

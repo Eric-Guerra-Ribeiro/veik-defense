@@ -12,6 +12,7 @@ class Unit(abc.ABC):
         self.cur_pos = bf_map.get_enemy_camp_pos()
         self.next_pos = self.path[self.cur_pos]
         self.move_progress = 0
+        self.alive = True
     
     def move(self):
         """
@@ -48,7 +49,7 @@ class Unit(abc.ABC):
         Make so the unit dies.
         """
         # TODO implement
-        pass
+        self.alive = False
     
     def get_move_prog(self):
         """

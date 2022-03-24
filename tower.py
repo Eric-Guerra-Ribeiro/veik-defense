@@ -26,6 +26,8 @@ class Tower(abc.ABC):
             while self.shoot_progress >= 1:
                 self.shoot_progress -=1
                 self._target.take_dmg(self.dmg, 1)
+            if not self._target.alive:
+                self.target = None
 
     @property
     def target(self):
