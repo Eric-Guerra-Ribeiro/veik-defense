@@ -29,9 +29,9 @@ class GameController:
         # Temporary function for testing TODO Remove this function
         self.units.append(unit.Infantry(self.bf_map))
 
-    def spawn_tower(self):
+    def spawn_tower(self, pos):
         # Temporary function for testing TODO Remove this function
-        self.towers.append(tower.MachineGun(self.bf_map, (2,1)))
+        self.towers.append(tower.MachineGun(self.bf_map, pos))
 
     def get_map(self):
         """

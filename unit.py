@@ -34,7 +34,7 @@ class Unit(abc.ABC):
         kills it if health goes to zero or bellow.
         """
         self.health -= dmg*(armor_pierc/self.armor)**gc.AP_EFFECTIVENESS
-        if self.health <= 0:
+        if self.health <= gc.EPSILON:
             self.die()
 
     def damage_camp(self):

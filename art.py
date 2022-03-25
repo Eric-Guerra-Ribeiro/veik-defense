@@ -46,6 +46,13 @@ class Art:
         pygame.draw.circle(mgun_sur, pgc.ALLY_CAMP_COLOR, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2), pgc.GRID_SIZE//2)
         return {enums.Tower.MACHINE_GUN: mgun_sur}
 
+    def hp_bar(self, pos, perc_hp):
+        """
+        Draws a unit's hp bar if not full.
+        """
+        if perc_hp < 1:
+            pygame.draw.rect(self.screen, pgc.RED, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE, pgc.HP_HEIGHT))
+
     def draw(self):
         """
         Draws all elements in screen.
@@ -57,6 +64,7 @@ class Art:
             self.screen.blit(
                 self.unit_imgs[unit.get_unit_type()], unit_pos
             )
+            self.hp_bar(unit_pos, unit.get_health_perc())
         for tower in self.game.towers:
             tower_pos = screenpos.unit_pos_in_scrn(tower.pos, tower.pos, 1)
             self.screen.blit(
