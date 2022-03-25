@@ -64,6 +64,8 @@ class Art:
             self.screen.blit(
                 self.unit_imgs[unit.get_unit_type()], unit_pos
             )
+        for unit in self.game.units:
+            unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.hp_bar(unit_pos, unit.get_health_perc())
         for tower in self.game.towers:
             tower_pos = screenpos.unit_pos_in_scrn(tower.pos, tower.pos, 1)
