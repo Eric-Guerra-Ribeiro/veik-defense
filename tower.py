@@ -15,7 +15,7 @@ class Tower(abc.ABC):
         self._target = None
         self.range = gc.BASE_RANGE
         self.shoot_progress = 0
-    
+
     def in_range(self, pos):
         dist2 = (self.pos[0] - pos[0])**2 + (self.pos[1] - pos[1])**2
         return dist2 <= self.range**2
@@ -24,7 +24,7 @@ class Tower(abc.ABC):
         if self._target is not None:
             self.shoot_progress += self.fire_rate
             while self.shoot_progress >= 1:
-                self.shoot_progress -=1
+                self.shoot_progress -= 1
                 self._target.take_dmg(self.dmg, 1)
             if not self._target.alive:
                 self.target = None
@@ -39,13 +39,17 @@ class Tower(abc.ABC):
 
     def find_target(self, units):
         if self.target is not None:
-                if not self.in_range(self.target.cur_pos):
-                        self.target = None
+            if not self.in_range(self.target.cur_pos):
+                self.target = None
         if self.target is None:
             for troop in units:
                 if self.in_range(troop.cur_pos):
                     self.target = troop
                     break
+
+    def get_tower_type(self):
+        return self.tower_type
+
 
 class MachineGun(Tower):
     """
@@ -56,6 +60,22 @@ class MachineGun(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = 3*gc.BASE_FIRE_RATE
+        self.fire_rate = 12*gc.BASE_FIRE_RATE
         self.dmg = gc.BASE_TDMG
         self.size = gc.BASE_SIZE
+        self.tower_type = enums.Tower.MACHINE_GUN
+
+
+class Cannon(Tower):
+    """
+    Machine gun defense tower
+    """
+
+    def __init__(self, bf_map, pos):
+        super().__init__(bf_map, pos)
+        self.pos = pos
+
+        self.fire_rate = gc.BASE_FIRE_RATE
+        self.dmg = gc.BASE_TDMG * 15
+        self.size = gc.BASE_SIZE
+        self.tower_type = enums.Tower.CANNON

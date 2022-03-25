@@ -15,8 +15,8 @@ def main():
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
     arts = art.Art(screen, game)
      #TODO: Change this
-    game.spawn_tower((2, 1))
-    game.spawn_tower((2, 7))
+    game.spawn_mgun((2, 1))
+    game.spawn_cannon((2, 7))
     while game.is_running():
         clock.tick(pgc.FREQUENCY)
         arts.draw()
