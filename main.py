@@ -3,6 +3,7 @@ import pygame
 import pygameconstants as pgc
 import gamecontroller
 import art
+import sounds
 
 def main():
     """
@@ -13,6 +14,7 @@ def main():
     clock = pygame.time.Clock()
     game = gamecontroller.GameController()
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
+    bkgmusic = sounds.BackgroundMusic()
     arts = art.Art(screen, game)
      #TODO: Change this
     game.spawn_tower()
