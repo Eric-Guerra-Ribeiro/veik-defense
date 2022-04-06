@@ -17,7 +17,8 @@ def main():
     bkgmusic = sounds.BackgroundMusic()
     arts = art.Art(screen, game)
      #TODO: Change this
-    game.spawn_tower()
+    game.spawn_mgun((2, 1))
+    game.spawn_cannon((2, 7))
     while game.is_running():
         clock.tick(pgc.FREQUENCY)
         arts.draw()

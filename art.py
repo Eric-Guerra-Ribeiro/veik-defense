@@ -44,7 +44,16 @@ class Art:
         """
         mgun_sur = pygame.Surface((pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
         pygame.draw.circle(mgun_sur, pgc.ALLY_CAMP_COLOR, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2), pgc.GRID_SIZE//2)
-        return {enums.Tower.MACHINE_GUN: mgun_sur}
+        cannon_sur = pygame.Surface((pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
+        pygame.draw.circle(cannon_sur, pgc.YELLOW, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2), pgc.GRID_SIZE//2)
+        return {enums.Tower.MACHINE_GUN: mgun_sur, enums.Tower.CANNON: cannon_sur}
+
+    def hp_bar(self, pos, perc_hp):
+        """
+        Draws a unit's hp bar if not full.
+        """
+        if perc_hp < 1:
+            pygame.draw.rect(self.screen, pgc.RED, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE, pgc.HP_HEIGHT))
 
     def draw(self):
         """
@@ -57,9 +66,12 @@ class Art:
             self.screen.blit(
                 self.unit_imgs[unit.get_unit_type()], unit_pos
             )
+        for unit in self.game.units:
+            unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
+            self.hp_bar(unit_pos, unit.get_health_perc())
         for tower in self.game.towers:
             tower_pos = screenpos.unit_pos_in_scrn(tower.pos, tower.pos, 1)
             self.screen.blit(
-                self.tower_imgs[enums.Tower.MACHINE_GUN], tower_pos
+                self.tower_imgs[tower.get_tower_type()], tower_pos
             )
         pygame.display.flip()
