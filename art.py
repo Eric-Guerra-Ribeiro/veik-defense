@@ -55,10 +55,8 @@ class Art():
         """
         Creates surfaces with an image of each tower type.
         """
-        mgun_sur = pygame.Surface((pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
-        pygame.draw.circle(mgun_sur, pgc.ALLY_CAMP_COLOR, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2), pgc.GRID_SIZE//2)
-        cannon_sur = pygame.Surface((pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
-        pygame.draw.circle(cannon_sur, pgc.YELLOW, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2), pgc.GRID_SIZE//2)
+        mgun_sur = pygame.image.load("sprites/tower/machinegun0.png")
+        cannon_sur = pygame.image.load("sprites/tower/cannon0.png")
         return {enums.Tower.MACHINE_GUN: mgun_sur, enums.Tower.CANNON: cannon_sur}
 
     def hp_bar(self, pos, perc_hp):
