@@ -68,7 +68,7 @@ class MachineGun(Tower):
 
 class Cannon(Tower):
     """
-    Machine gun defense tower
+    Rocket Launcher defense tower
     """
 
     def __init__(self, bf_map, pos):
