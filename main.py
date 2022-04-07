@@ -14,7 +14,7 @@ def main():
     clock = pygame.time.Clock()
     game = gamecontroller.GameController()
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
-    bkgmusic = sounds.BackgroundMusic()
+    bkgmusic = art.BackgroundMusic()
     arts = art.Art(screen, game)
      #TODO: Change this
     game.spawn_mgun((2, 1))
