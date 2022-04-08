@@ -44,7 +44,7 @@ class Tower(abc.ABC):
                 self.target = None
         if self.target is None:
             for troop in units:
-                if self.in_range(troop.cur_pos):
+                if self.in_range(troop.cur_pos) and troop.get_unit_type() not in self.cant_shoot:
                     self.target = troop
                     break
 
