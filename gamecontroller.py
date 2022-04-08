@@ -19,7 +19,7 @@ class GameController:
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
-        self.selected_tower = 1
+        self.selected_tower = enums.Tower.MACHINE_GUN
         self.game_state = enums.GameState.PLAYING
 
 

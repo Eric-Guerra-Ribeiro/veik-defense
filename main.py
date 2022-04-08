@@ -32,10 +32,6 @@ def main():
     inputs = input.Input(game)
     arts = art.Art(screen, game)
      #TODO: Change this
-    game.spawn_mgun((2, 1))
-    game.spawn_cannon((2, 7))
-    game.spawn_antitank((3, 8))
-    game.spawn_missile((2, 5))
     while game.running:
         if game.go:
             show_go_screen()

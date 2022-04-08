@@ -31,7 +31,13 @@ def add_tower(map_cell, game):
     """
     if game.selected_tower is None:
         return
-    game.are_cells_empty(map_cell, 1)
     if game.are_cells_empty(map_cell, 1):
-        game.towers.append(tower.MachineGun(game.bf_map, map_cell))
         game.ocupy_cells(map_cell, 1)
+        if game.selected_tower == enums.Tower.MACHINE_GUN:
+            game.towers.append(tower.MachineGun(game.bf_map, map_cell))
+        elif game.selected_tower == enums.Tower.CANNON:
+            game.towers.append(tower.Cannon(game.bf_map, map_cell))
+        elif game.selected_tower == enums.Tower.ANTI_TANK:
+            game.towers.append(tower.AntiTank(game.bf_map, map_cell))
+        elif game.selected_tower == enums.Tower.MISSILE:
+            game.towers.append(tower.Missile(game.bf_map, map_cell))

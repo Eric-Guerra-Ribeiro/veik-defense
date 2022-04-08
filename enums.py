@@ -28,6 +28,13 @@ class Tower(enum.Enum):
     CANNON = enum.auto()
     ANTI_TANK = enum.auto()
     MISSILE = enum.auto()
+    
+    def succ(self):
+        v = self.value + 1
+        try:   
+            return Tower(v)
+        except:
+            return Tower(1)
 
 class GameState(enum.Enum):
     """

@@ -97,6 +97,8 @@ class Input:
                         self.game.spawn_tank()
                     elif event.key == pygame.K_b:
                         self.game.spawn_airforce()
+                    elif event.key == pygame.K_c:
+                        self.game.selected_tower = self.game.selected_tower.succ()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for button in self.buttons[enums.GameState.PLAYING]:
                         button.press(pygame.mouse.get_pos())
