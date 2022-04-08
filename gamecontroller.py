@@ -10,10 +10,16 @@ class GameController:
     """
 
     def __init__(self):
+        self.reset()
+        
+    
+    def reset(self):
         self.running = True
+        self.go = False
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
+
 
     def run(self):
         # Temporary function for testing TODO remove or improve
@@ -25,6 +31,8 @@ class GameController:
         for tower in self.towers:
             tower.find_target(self.units)
             tower.shoot()
+        if not self.bf_map.ally_camp.alive:
+            self.go = True
 
     def spawn_troop(self):
         # Temporary function for testing TODO Remove this function

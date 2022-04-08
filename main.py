@@ -3,12 +3,24 @@ import pygame
 import pygameconstants as pgc
 import gamecontroller
 import art
-import sounds
 
 def main():
     """
     Main function for the Veik Defense game, including its main loop.
     """
+
+    def show_go_screen():
+        arts.draw_game_over_text()
+        waiting = True
+        while waiting:
+            clock.tick(pgc.FREQUENCY)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYUP:
+                    waiting = False
+
+
     pygame.init()
     pygame.display.set_caption("Veik Defense")
     clock = pygame.time.Clock()
@@ -21,8 +33,11 @@ def main():
     game.spawn_cannon((2, 7))
     while game.is_running():
         clock.tick(pgc.FREQUENCY)
-        arts.draw()
         game.run()
+        arts.draw()
+        if game.go:
+            show_go_screen()
+            game.reset()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game.running = False
