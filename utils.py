@@ -1,4 +1,5 @@
 import enums
+import tower
 
 def valid_index(index, list_dim):
     """
@@ -23,3 +24,12 @@ def direction2angle(direction):
         return 180
     elif direction == enums.Direction.DOWN:
         return -90
+
+def add_turret(map_cell, game):
+    """
+    Adds turret to map
+    """
+    if game.selected_tower is None:
+        return
+    else:
+        game.towers.append(tower.MachineGun(game.bf_map, map_cell))
