@@ -1,4 +1,3 @@
-from chess import BB_FILE_MASKS
 import enums
 import gameconstants as gc
 import utils

@@ -1,6 +1,5 @@
-from this import d
 import pygame
-from random import randint
+import random
 
 import pygameconstants as pgc
 import enums
@@ -33,7 +32,7 @@ class Art():
         for i in range(bf_map.height):
             for j in range(bf_map.width):
                 if bf_map.get_terrain((i, j)) == enums.Terrain.GRASS:
-                    map_img.blit(terrainsprites[randint(0, pgc.GRASS_SPRITES - 1)], (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
+                    map_img.blit(random.choice(terrainsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
                 else:
                   pygame.draw.rect(map_img, terrain_color[bf_map.get_terrain((i, j))],
                   pygame.Rect(j*pgc.GRID_SIZE, i*pgc.GRID_SIZE,
