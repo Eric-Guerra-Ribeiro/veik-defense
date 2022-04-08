@@ -14,6 +14,7 @@ class Art():
         self.map_img = self.make_map_surface(game.get_map())
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
+        self.regular_font = pygame.font.Font('freesansbold.ttf', 30)
 
 
     def make_map_surface(self, bf_map):
@@ -70,7 +71,11 @@ class Art():
         Draws ally's camp hp bar.
         """
         pos = pgc.ALLY_CAMP_HP_POS
+        perc = int(100*perc_hp)
         pygame.draw.rect(self.screen, pgc.GREEN, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE*3, pgc.ALLY_CAMP_HP_HEIGHT))
+        text = self.regular_font.render(str(perc) + '%', True, pgc.RED)
+        self.screen.blit(text, pgc.ALLY_CAMP_HP_PERC_POS)
+        self.screen.blit(pygame.image.load("sprites/general/heart.png"), pgc.ALLY_CAMP_HP_POS)
 
     def draw(self):
         """
