@@ -30,7 +30,7 @@ def main():
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
     bkgmusic = art.BackgroundMusic()
     inputs = input.Input(game)
-    arts = art.Art(screen, game)
+    arts = art.Art(screen, game, inputs)
      #TODO: Change this
     game.spawn_mgun((2, 1))
     game.spawn_cannon((2, 7))

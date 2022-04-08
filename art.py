@@ -10,9 +10,10 @@ class Art():
     """
     Class that handles all art assets of the game (visual and sounds).
     """
-    def __init__(self, screen, game):
+    def __init__(self, screen, game, inputs):
         self.screen = screen
         self.game = game
+        self.inputs = inputs
         self.map_img = self.make_map_surface(game.get_map())
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
@@ -111,6 +112,10 @@ class Art():
         self.screen.blit(text, pgc.ALLY_CAMP_HP_PERC_POS)
         self.screen.blit(pygame.image.load("sprites/general/heart.png"), pgc.ALLY_CAMP_HP_POS)
 
+    def draw_buttons(self):
+        for button in self.inputs.get_buttons():
+            self.screen.blit(button.content, button.pos)
+
     def draw(self):
         """
         Draws all elements in screen.
@@ -119,6 +124,7 @@ class Art():
         self.screen.blit(self.map_img, pgc.MAP_CORNER_POS)
         
         
+
         self.draw_ally_camp_hp_bar()
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
@@ -133,6 +139,9 @@ class Art():
             self.screen.blit(
                 self.tower_imgs[tower.get_tower_type()], tower_pos
             )
+        
+        self.draw_buttons()
+
         pygame.display.flip()
 
 def BackgroundMusic():

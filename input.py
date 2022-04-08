@@ -28,7 +28,7 @@ class Button:
         """
         Presses the button if the mouse is on the button.
         """
-        if self.is_pressed(self, mouse_pos):
+        if self.is_pressed(mouse_pos):
             self.action(self.game)
 
     @property
@@ -76,12 +76,21 @@ class Input:
     """
     def __init__(self, game):
         self.game = game
-        self.buttons = {
+        self.boards = {
             enums.GameState.PLAYING : [
                 Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.add_tower, self.game)
             ]
         }
-    
+        self.buttons = {
+            enums.GameState.PLAYING : [
+                Button((1100,300), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/machinegun0.png"),
+                       lambda _game: utils.select_tower(_game, enums.Tower.MACHINE_GUN), game)
+            ]
+        }
+
+    def get_buttons(self):
+        return self.buttons[self.game.game_state]
+
     def input(self):
         """
         Reads the input accoring to game state.
@@ -98,5 +107,7 @@ class Input:
                     elif event.key == pygame.K_b:
                         self.game.spawn_airforce()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
+                    for board in self.boards[enums.GameState.PLAYING]:
+                        board.press(pygame.mouse.get_pos())
                     for button in self.buttons[enums.GameState.PLAYING]:
                         button.press(pygame.mouse.get_pos())

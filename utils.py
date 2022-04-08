@@ -35,3 +35,13 @@ def add_tower(map_cell, game):
     if game.are_cells_empty(map_cell, 1):
         game.towers.append(tower.MachineGun(game.bf_map, map_cell))
         game.ocupy_cells(map_cell, 1)
+
+
+def select_tower(game, tower):
+    """
+    Selects a tower type
+    """
+    if game.selected_tower == tower:
+        game.selected_tower = None
+    else:
+        game.selected_tower = tower
