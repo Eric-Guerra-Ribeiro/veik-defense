@@ -16,6 +16,7 @@ class Art():
         self.map_img = self.make_map_surface(game.get_map())
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
+        self.regular_font = pygame.font.Font('freesansbold.ttf', 30)
 
 
     def make_map_surface(self, bf_map):
@@ -66,6 +67,19 @@ class Art():
         """
         if perc_hp < 1:
             pygame.draw.rect(self.screen, pgc.RED, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE, pgc.HP_HEIGHT))
+        
+    def draw_ally_camp_hp_bar(self):
+        """
+        Draws ally's camp hp bar.
+        """
+        ally_camp = self.game.get_map().ally_camp
+        pos = pgc.ALLY_CAMP_HP_POS
+        perc_hp = ally_camp.get_health_perc()
+        perc = max(0, int(100*perc_hp))
+        pygame.draw.rect(self.screen, pgc.GREEN, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE*3, pgc.ALLY_CAMP_HP_HEIGHT))
+        text = self.regular_font.render(str(perc) + '%', True, pgc.RED)
+        self.screen.blit(text, pgc.ALLY_CAMP_HP_PERC_POS)
+        self.screen.blit(pygame.image.load("sprites/general/heart.png"), pgc.ALLY_CAMP_HP_POS)
 
     def draw(self):
         """
@@ -73,6 +87,9 @@ class Art():
         """
         self.screen.fill(pgc.BLACK)
         self.screen.blit(self.map_img, pgc.MAP_CORNER_POS)
+        
+        
+        self.draw_ally_camp_hp_bar()
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.screen.blit(
@@ -89,7 +106,7 @@ class Art():
         pygame.display.flip()
 
 def BackgroundMusic():
-    backgroundmusic = pygame.mixer.music.load("sounds/BackgroundMusic_FibradeHeroi.mp3")
+    backgroundmusic = pygame.mixer.music.load("sounds/BackgroundMusic_FibradeHeroi.ogg")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
     return backgroundmusic
