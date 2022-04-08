@@ -1,7 +1,7 @@
-from chess import BB_FILE_MASKS
 import enums
 import gameconstants as gc
 import utils
+from allycamp import AllyCamp
 
 class BattleFieldMap:
     """
@@ -20,6 +20,7 @@ class BattleFieldMap:
             (7, 14), (6, 14), (5, 14), (4, 14), (3, 14), (3, 13), (3, 12), (2, 12), (1, 12)
         ]
         self.ally_camp_pos = (0, 12)
+        self.ally_camp = AllyCamp(self.ally_camp_pos)
         self.enemy_camp_pos = (7, 0)
         self.grid = [self.width*[enums.Terrain.GRASS] for _ in range(self.height)]
         self.grid[self.ally_camp_pos[0]][self.ally_camp_pos[1]] = enums.Terrain.ALLY_CAMP

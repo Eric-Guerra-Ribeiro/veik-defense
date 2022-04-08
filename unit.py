@@ -8,6 +8,7 @@ class Unit(abc.ABC):
     Abstract class for military unit
     """
     def __init__(self, bf_map):
+        self.ally_camp = bf_map.ally_camp
         self.path = bf_map.path
         self.cur_pos = bf_map.get_enemy_camp_pos()
         self.next_pos = self.path[self.cur_pos]
@@ -41,8 +42,7 @@ class Unit(abc.ABC):
         """
         Makes so the unit damages the camp.
         """
-        # TODO implement
-        pass
+        self.ally_camp.take_dmg(self.dmg)
 
     def die(self):
         """
@@ -93,3 +93,4 @@ class Infantry(Unit):
         self.speed = gc.BASE_SPEED
         self.armor = gc.BASE_ARMOR
         self.unit_type = enums.Unit.INFANTRY
+        self.dmg = gc.BASE_DMG

@@ -1,4 +1,3 @@
-from this import d
 import pygame
 from random import randint
 
@@ -65,6 +64,13 @@ class Art():
         """
         if perc_hp < 1:
             pygame.draw.rect(self.screen, pgc.RED, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE, pgc.HP_HEIGHT))
+        
+    def ally_camp_hp_bar(self, perc_hp):
+        """
+        Draws ally's camp hp bar.
+        """
+        pos = pgc.ALLY_CAMP_HP_POS
+        pygame.draw.rect(self.screen, pgc.GREEN, pygame.Rect(*pos, perc_hp*pgc.GRID_SIZE*3, pgc.ALLY_CAMP_HP_HEIGHT))
 
     def draw(self):
         """
@@ -72,6 +78,9 @@ class Art():
         """
         self.screen.fill(pgc.BLACK)
         self.screen.blit(self.map_img, pgc.MAP_CORNER_POS)
+        
+        ally_camp = self.game.get_map().ally_camp
+        self.ally_camp_hp_bar(ally_camp.get_health_perc())
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.screen.blit(
