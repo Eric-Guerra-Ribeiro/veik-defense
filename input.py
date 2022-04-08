@@ -1,5 +1,10 @@
 import pygame
 
+import enums
+import utils
+import gameconstants as gc
+import pygameconstants as pgc
+
 class Button:
     """
     Creates a button on screen.
@@ -62,4 +67,32 @@ class Board:
         Presses a cell in the board if the mouse is on it.
         """
         if self.is_pressed(mouse_pos):
-            self.action(self.mouse_cell, self.game)
+            self.action(self.mouse_cell(mouse_pos), self.game)
+
+
+class Input:
+    """
+    Class that controlls all inputs to the game.
+    """
+    def __init__(self, game):
+        self.game = game
+        self.buttons = {
+            enums.GameState.PLAYING : [
+                Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.add_turret, self.game)
+            ]
+        }
+    
+    def input(self):
+        """
+        Reads the input accoring to game state.
+        """
+        if self.game.game_state == enums.GameState.PLAYING:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.game.running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.game.spawn_troop()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    for button in self.buttons[enums.GameState.PLAYING]:
+                        button.press(pygame.mouse.get_pos())

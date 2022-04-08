@@ -4,6 +4,7 @@ import pygameconstants as pgc
 import gamecontroller
 import art
 import sounds
+import input
 
 def main():
     """
@@ -15,20 +16,16 @@ def main():
     game = gamecontroller.GameController()
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
     bkgmusic = art.BackgroundMusic()
+    inputs = input.Input(game)
     arts = art.Art(screen, game)
      #TODO: Change this
     game.spawn_mgun((2, 1))
     game.spawn_cannon((2, 7))
-    while game.is_running():
+    while game.running:
         clock.tick(pgc.FREQUENCY)
         arts.draw()
         game.run()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game.running = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    game.spawn_troop()
+        inputs.input()
 
 
 if __name__ == "__main__":

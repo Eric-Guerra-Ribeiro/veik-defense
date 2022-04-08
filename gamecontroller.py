@@ -10,10 +10,12 @@ class GameController:
     """
 
     def __init__(self):
-        self.running = True
+        self._running = True
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
+        self.selected_tower = 1
+        self.game_state = enums.GameState.PLAYING
 
     def run(self):
         # Temporary function for testing TODO remove or improve
@@ -44,8 +46,14 @@ class GameController:
         """
         return self.bf_map
 
-    def is_running(self):
+    @property
+    def running(self):
         """
         Returns if the game is running.
         """
-        return self.running
+        return self._running
+    
+    @running.setter
+    def running(self, is_running):
+        self._running = is_running
+
