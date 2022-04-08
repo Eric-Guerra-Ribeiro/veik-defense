@@ -20,6 +20,19 @@ class Art():
         self.tower_sounds = self.make_tower_sounds()
 
 
+    def draw_game_over_text(self):
+        font1 = pygame.font.Font('freesansbold.ttf', 50)
+        text = font1.render('GAME OVER', True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/3))
+
+        font2 = pygame.font.Font('freesansbold.ttf', 35)
+        text = font2.render('Aperte qualquer tecla para reiniciar', True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
+
+        pygame.display.flip()
+
+
+
     def make_map_surface(self, bf_map):
         """
         Creates a surface with an image corresponding to the map.
