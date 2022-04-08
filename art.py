@@ -22,6 +22,9 @@ class Art():
 
 
     def draw_game_over_text(self):
+        """
+        Draws game over text on screen.
+        """
         font1 = pygame.font.Font('freesansbold.ttf', 50)
         text = font1.render('GAME OVER', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/3))

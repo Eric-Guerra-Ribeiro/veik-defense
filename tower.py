@@ -6,7 +6,7 @@ import gameconstants as gc
 
 class Tower(abc.ABC):
     """
-    Abstract class for defense towers
+    Abstract class for defense towers.
     """
 
     def __init__(self, bf_map, pos):
@@ -22,6 +22,9 @@ class Tower(abc.ABC):
         return dist2 <= self.range**2
 
     def shoot(self):
+        """
+        Shoots target (unit).
+        """
         if self._target is not None:
             self.shoot_progress += self.fire_rate
             while self.shoot_progress >= 1:
@@ -54,7 +57,7 @@ class Tower(abc.ABC):
 
 class MachineGun(Tower):
     """
-    Machine gun defense tower
+    Machine gun defense tower.
     """
 
     def __init__(self, bf_map, pos):
@@ -70,7 +73,7 @@ class MachineGun(Tower):
 
 class Cannon(Tower):
     """
-    Rocket Launcher defense tower
+    Rocket Launcher defense tower.
     """
 
     def __init__(self, bf_map, pos):
@@ -84,7 +87,7 @@ class Cannon(Tower):
 
 class AntiTank(Tower):
     """
-    Armored defense tower
+    Armored defense tower.
     """
 
     def __init__(self, bf_map, pos):
@@ -99,7 +102,7 @@ class AntiTank(Tower):
 
 class Missile(Tower):
     """
-    Air force defense tower
+    Air force defense tower.
     """
 
     def __init__(self, bf_map, pos):

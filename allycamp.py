@@ -1,6 +1,9 @@
 import gameconstants as gc
 
 class AllyCamp():
+      """
+      Main class for the ally camp object.
+      """
       def __init__(self, pos):
           self._pos = pos
           self._max_health = gc.BASE_HEALTH*20

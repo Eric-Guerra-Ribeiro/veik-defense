@@ -82,7 +82,7 @@ class BattleFieldMap:
     
     def is_cells_square_empty(self, row, column, n):
         """
-        Returns if a square of size n is empty
+        Returns if a square of size n is empty.
         """
         for x in range(row, row + n):
             for y in range(column, column + n):
