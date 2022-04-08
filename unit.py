@@ -139,7 +139,7 @@ class Armory(Unit):
         self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
         self.speed = gc.BASE_SPEED / 2
-        self.armor = gc.BASE_ARMOR * 5
+        self.armor = gc.BASE_ARMOR * 4
         self.unit_type = enums.Unit.ARMORED
         self.dmg = gc.BASE_DMG
         self.pierc_dict = {enums.Tower.ANTI_TANK : 3,
