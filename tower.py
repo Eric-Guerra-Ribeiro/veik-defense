@@ -25,7 +25,7 @@ class Tower(abc.ABC):
             self.shoot_progress += self.fire_rate
             while self.shoot_progress >= 1:
                 self.shoot_progress -= 1
-                self._target.take_dmg(self.dmg, 1)
+                self._target.take_dmg(self.dmg, self.get_tower_type())
             if not self._target.alive:
                 self.target = None
 
@@ -60,7 +60,7 @@ class MachineGun(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = 12*gc.BASE_FIRE_RATE
+        self.fire_rate = 10*gc.BASE_FIRE_RATE
         self.dmg = gc.BASE_TDMG
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MACHINE_GUN
@@ -75,8 +75,8 @@ class Cannon(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = gc.BASE_FIRE_RATE
-        self.dmg = gc.BASE_TDMG * 15
+        self.fire_rate = gc.BASE_FIRE_RATE*2
+        self.dmg = gc.BASE_TDMG * 5
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.CANNON
 
@@ -103,7 +103,7 @@ class Missile(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = gc.BASE_FIRE_RATE * 5
+        self.fire_rate = gc.BASE_FIRE_RATE * 3
         self.dmg = gc.BASE_TDMG * 5
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MISSILE
