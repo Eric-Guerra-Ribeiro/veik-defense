@@ -15,6 +15,7 @@ class Unit(abc.ABC):
         self.next_pos = self.path[self.cur_pos]
         self.move_progress = 0
         self.alive = True
+        self.pierc_dict = {}
     
     def move(self):
         """
@@ -30,12 +31,17 @@ class Unit(abc.ABC):
                 self.damage_camp()
                 break
 
-    def take_dmg(self, dmg, armor_pierc):
+    def take_dmg(self, dmg, tower_type):
         """
         Reduces the unit's health and
         kills it if health goes to zero or bellow.
         """
-        self.health -= dmg*(armor_pierc/self.armor)**gc.AP_EFFECTIVENESS
+        if tower_type in self.pierc_dict.keys():
+            armor_pierc = self.pierc_dict[tower_type]
+        else:
+            armor_pierc = 1
+
+        self.health -= dmg*(armor_pierc/self.armor)
         if self.health <= gc.EPSILON:
             self.die()
 
@@ -119,9 +125,10 @@ class AirForce(Unit):
         self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
         self.speed = gc.BASE_SPEED * 2
-        self.armor = gc.BASE_ARMOR / 2
+        self.armor = gc.BASE_ARMOR * 2
         self.unit_type = enums.Unit.AIR_FORCE
         self.dmg = gc.BASE_DMG
+        self.pierc_dict = {enums.Tower.MISSILE : 3}
 
 class Armory(Unit):
     """
@@ -132,6 +139,9 @@ class Armory(Unit):
         self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
         self.speed = gc.BASE_SPEED / 2
-        self.armor = gc.BASE_ARMOR * 5
+        self.armor = gc.BASE_ARMOR * 4
         self.unit_type = enums.Unit.ARMORED
         self.dmg = gc.BASE_DMG
+        self.pierc_dict = {enums.Tower.ANTI_TANK : 3,
+                            enums.Tower.MACHINE_GUN : 0.5,
+                            enums.Tower.CANNON : 1.5}
