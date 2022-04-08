@@ -41,3 +41,13 @@ def add_tower(map_cell, game):
             game.towers.append(tower.AntiTank(game.bf_map, map_cell))
         elif game.selected_tower == enums.Tower.MISSILE:
             game.towers.append(tower.Missile(game.bf_map, map_cell))
+
+
+def select_tower(game, tower):
+    """
+    Selects a tower type
+    """
+    if game.selected_tower == tower:
+        game.selected_tower = None
+    else:
+        game.selected_tower = tower
