@@ -15,6 +15,7 @@ class Tower(abc.ABC):
         self._target = None
         self.range = gc.BASE_RANGE
         self.shoot_progress = 0
+        self.cant_shoot = []
 
     def in_range(self, pos):
         dist2 = (self.pos[0] - pos[0])**2 + (self.pos[1] - pos[1])**2
@@ -64,6 +65,7 @@ class MachineGun(Tower):
         self.dmg = gc.BASE_TDMG
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MACHINE_GUN
+        self.cant_shoot.append(enums.Unit.AIR_FORCE)
 
 
 class Cannon(Tower):
@@ -93,6 +95,7 @@ class AntiTank(Tower):
         self.dmg = gc.BASE_TDMG * 15
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.ANTI_TANK
+        self.cant_shoot.append(enums.Unit.AIR_FORCE)
 
 class Missile(Tower):
     """
@@ -103,7 +106,9 @@ class Missile(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = gc.BASE_FIRE_RATE * 3
-        self.dmg = gc.BASE_TDMG * 5
+        self.fire_rate = gc.BASE_FIRE_RATE * 2
+        self.dmg = gc.BASE_TDMG * 10
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MISSILE
+        self.cant_shoot.append(enums.Unit.INFANTRY)
+        self.cant_shoot.append(enums.Unit.ARMORED)
