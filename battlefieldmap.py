@@ -36,8 +36,9 @@ class BattleFieldMap:
         prev_pos = cur_pos
         map_dim = (self.height, self.width)
         path = {}
-        # TODO Add stop condition if it doesn't get to ally base
+        count = 0
         while cur_pos != self.ally_camp_pos:
+            count += 1
             i, j = cur_pos
             for index in ((i+1,j), (i-1, j), (i, j+1), (i, j-1)):
                 if (
@@ -49,6 +50,8 @@ class BattleFieldMap:
                     cur_pos = index
                     path[prev_pos] = cur_pos
                     break
+            if count > map_dim[0]*map_dim[1]:
+                raise Exception("Invalid Map Layout")
         path[self.ally_camp_pos] = self.ally_camp_pos
         return path
 
