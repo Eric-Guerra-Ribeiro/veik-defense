@@ -73,3 +73,8 @@ class GameController:
     def running(self, is_running):
         self._running = is_running
 
+    def are_cells_empty(self, map_cell, n):
+        return self.bf_map.is_cells_square_empty(*map_cell, n)
+
+    def ocupy_cells(self, map_cell, n):
+        self.bf_map.ocupy_cells_square(*map_cell, n)

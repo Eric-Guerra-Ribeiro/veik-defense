@@ -25,11 +25,13 @@ def direction2angle(direction):
     elif direction == enums.Direction.DOWN:
         return -90
 
-def add_turret(map_cell, game):
+def add_tower(map_cell, game):
     """
-    Adds turret to map
+    Adds tower to map
     """
     if game.selected_tower is None:
         return
-    else:
+    game.are_cells_empty(map_cell, 1)
+    if game.are_cells_empty(map_cell, 1):
         game.towers.append(tower.MachineGun(game.bf_map, map_cell))
+        game.ocupy_cells(map_cell, 1)

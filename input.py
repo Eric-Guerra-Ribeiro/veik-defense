@@ -78,7 +78,7 @@ class Input:
         self.game = game
         self.buttons = {
             enums.GameState.PLAYING : [
-                Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.add_turret, self.game)
+                Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.add_tower, self.game)
             ]
         }
     

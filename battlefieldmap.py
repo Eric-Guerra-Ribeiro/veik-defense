@@ -22,11 +22,16 @@ class BattleFieldMap:
         self.ally_camp_pos = (0, 12)
         self.ally_camp = AllyCamp(self.ally_camp_pos)
         self.enemy_camp_pos = (7, 0)
+
         self.grid = [self.width*[enums.Terrain.GRASS] for _ in range(self.height)]
+        self.is_cell_empty = [self.width*[True] for _ in range(self.height)]
         self.grid[self.ally_camp_pos[0]][self.ally_camp_pos[1]] = enums.Terrain.ALLY_CAMP
+        self.is_cell_empty[self.ally_camp_pos[0]][self.ally_camp_pos[1]] = False
         self.grid[self.enemy_camp_pos[0]][self.enemy_camp_pos[1]] = enums.Terrain.ENEMY_CAMP
+        self.is_cell_empty[self.enemy_camp_pos[0]][self.enemy_camp_pos[1]] = False
         for pos in paths_pos:
             self.grid[pos[0]][pos[1]] = enums.Terrain.ROAD
+            self.is_cell_empty[pos[0]][pos[1]] = False
         
         self.path = self.find_path()
 
@@ -75,13 +80,21 @@ class BattleFieldMap:
         """
         return self.enemy_camp_pos
     
-    def is_grass_square(self, left, top, n):
+    def is_cells_square_empty(self, row, column, n):
         """
-        Returns if a square of size n is in grass
+        Returns if a square of size n is empty
         """
-        for x in range(left, left + n + 1):
-            for y in range(top, top + n + 1):
-                pos = (x,y)
-                if self.get_terrain(pos) != enums.Terrain.GRASS:
+        for x in range(row, row + n):
+            for y in range(column, column + n):
+                if not self.is_cell_empty[x][y]:
                     return False
         return True
+
+
+    def ocupy_cells_square(self, row, column, n):
+        """
+        Makes so the cells in the square of size n are not empty.
+        """
+        for x in range(row, row + n):
+            for y in range(column, column + n):
+                self.is_cell_empty[x][y] = False
