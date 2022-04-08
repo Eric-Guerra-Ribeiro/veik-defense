@@ -17,6 +17,7 @@ class Art():
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
         self.regular_font = pygame.font.Font('freesansbold.ttf', 30)
+        self.tower_sounds = self.make_tower_sounds()
 
 
     def make_map_surface(self, bf_map):
@@ -26,9 +27,11 @@ class Art():
         terrainsprites = []
         for i in range(pgc.GRASS_SPRITES):
             terrainsprites.append(pygame.image.load("sprites/terrain/grass{0}.png".format(i)))
+        roadsprites = []
+        for i in range(pgc.ROAD_SRITES):
+            roadsprites.append(pygame.image.load("sprites/terrain/road{0}.png".format(i)))
         map_img = pygame.Surface((pgc.GRID_SIZE*bf_map.width, (pgc.GRID_SIZE*bf_map.height)))
         terrain_color = {
-            enums.Terrain.ROAD: pgc.ROAD_COLOR,
             enums.Terrain.ALLY_CAMP: pgc.ALLY_CAMP_COLOR,
             enums.Terrain.ENEMY_CAMP: pgc.ENEMY_CAMP_COLOR,
         }
@@ -36,6 +39,8 @@ class Art():
             for j in range(bf_map.width):
                 if bf_map.get_terrain((i, j)) == enums.Terrain.GRASS:
                     map_img.blit(random.choice(terrainsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
+                elif bf_map.get_terrain((i, j)) == enums.Terrain.ROAD:
+                    map_img.blit(random.choice(roadsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
                 else:
                   pygame.draw.rect(map_img, terrain_color[bf_map.get_terrain((i, j))],
                   pygame.Rect(j*pgc.GRID_SIZE, i*pgc.GRID_SIZE,
@@ -46,12 +51,10 @@ class Art():
         """
         Creates surfaces with an image of each unit type.
         """
-        enemysprites = pygame.image.load("sprites/enemies/soldier0.png")
-        # inf_sur = pygame.Surface((pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
-        # inf_sur.blit(enemysprites, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2))
-        #pygame.draw.circle(inf_sur, pgc.WHITE, (pgc.GRID_SIZE//2, pgc.GRID_SIZE//2), pgc.GRID_SIZE//2)
-        # return {enums.Unit.INFANTRY: inf_sur}
-        return {enums.Unit.INFANTRY: enemysprites}
+        infantryunit = pygame.image.load("sprites/enemies/soldier0.png")
+        armoredunit = pygame.image.load("sprites/enemies/tank0.png")
+        airforceunit = pygame.image.load("sprites/enemies/plane0.png")
+        return {enums.Unit.INFANTRY: infantryunit, enums.Unit.ARMORED: armoredunit, enums.Unit.AIR_FORCE: airforceunit}
 
     def make_tower_imgs(self):
         """
@@ -59,8 +62,22 @@ class Art():
         """
         mgun_sur = pygame.image.load("sprites/tower/machinegun0.png")
         cannon_sur = pygame.image.load("sprites/tower/cannon0.png")
-        return {enums.Tower.MACHINE_GUN: mgun_sur, enums.Tower.CANNON: cannon_sur}
-
+        antitank_sur = pygame.image.load("sprites/tower/antitank0.png")
+        missile_sur = pygame.image.load("sprites/tower/missile0.png")
+        return {enums.Tower.MACHINE_GUN: mgun_sur, enums.Tower.CANNON: cannon_sur,
+                enums.Tower.ANTI_TANK: antitank_sur, enums.Tower.MISSILE: missile_sur}
+    
+    def make_tower_sounds(self):
+        """
+        Creates sounds for a shoot in each tower type.
+        """
+        mgun_snd = pygame.mixer.Sound("sounds/AKShoot.ogg")
+        cannon_snd = pygame.mixer.Sound("sounds/HEShoot.ogg")
+        antitank_snd = pygame.mixer.Sound("sounds/AWPShoot.ogg")
+        missile_snd = pygame.mixer.Sound("sounds/AKShoot.ogg")
+        return {enums.Tower.MACHINE_GUN: mgun_snd, enums.Tower.CANNON: cannon_snd,
+                enums.Tower.ANTI_TANK: antitank_snd, enums.Tower.MISSILE: missile_snd}
+    
     def hp_bar(self, pos, perc_hp):
         """
         Draws a unit's hp bar if not full.

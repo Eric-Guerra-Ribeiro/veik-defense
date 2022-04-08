@@ -10,10 +10,12 @@ class GameController:
     """
 
     def __init__(self):
-        self.running = True
+        self._running = True
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
+        self.selected_tower = 1
+        self.game_state = enums.GameState.PLAYING
 
     def run(self):
         # Temporary function for testing TODO remove or improve
@@ -26,9 +28,17 @@ class GameController:
             tower.find_target(self.units)
             tower.shoot()
 
-    def spawn_troop(self):
+    def spawn_infantry(self):
         # Temporary function for testing TODO Remove this function
         self.units.append(unit.Infantry(self.bf_map))
+    
+    def spawn_airforce(self):
+    # Temporary function for testing TODO Remove this function
+        self.units.append(unit.AirForce(self.bf_map))
+
+    def spawn_tank(self):
+    # Temporary function for testing TODO Remove this function
+        self.units.append(unit.Armory(self.bf_map))
 
     def spawn_mgun(self, pos):
         # Temporary function for testing TODO Remove this function
@@ -38,14 +48,28 @@ class GameController:
         # Temporary function for testing TODO Remove this function
         self.towers.append(tower.Cannon(self.bf_map, pos))
 
+    def spawn_antitank(self, pos):
+        # Temporary function for testing TODO Remove this function
+        self.towers.append(tower.AntiTank(self.bf_map, pos))
+
+    def spawn_missile(self, pos):
+        # Temporary function for testing TODO Remove this function
+        self.towers.append(tower.Missile(self.bf_map, pos))
+
     def get_map(self):
         """
         Returns the battlefield map.
         """
         return self.bf_map
 
-    def is_running(self):
+    @property
+    def running(self):
         """
         Returns if the game is running.
         """
-        return self.running
+        return self._running
+    
+    @running.setter
+    def running(self, is_running):
+        self._running = is_running
+
