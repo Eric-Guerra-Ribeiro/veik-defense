@@ -4,6 +4,8 @@ import random
 import pygameconstants as pgc
 import enums
 import screenpos
+import utils
+
 class Art():
     """
     Class that handles all art assets of the game (visual and sounds).
@@ -74,7 +76,7 @@ class Art():
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.screen.blit(
-                self.unit_imgs[unit.get_unit_type()], unit_pos
+                pygame.transform.rotate(self.unit_imgs[unit.get_unit_type()], utils.direction2angle(unit.get_direction())), unit_pos
             )
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)

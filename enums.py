@@ -34,3 +34,12 @@ class GameState(enum.Enum):
     """
     MENU = enum.auto()
     PLAYING = enum.auto()
+
+class Direction(enum.Enum):
+    """
+    Enum class for the direction of the movement of the unit.
+    """
+    RIGHT = enum.auto()
+    UP = enum.auto()
+    LEFT = enum.auto()
+    DOWN = enum.auto()

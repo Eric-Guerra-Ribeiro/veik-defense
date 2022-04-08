@@ -2,6 +2,7 @@ import abc
 
 import enums
 import gameconstants as gc
+import screenpos
 
 class Unit(abc.ABC):
     """
@@ -77,9 +78,23 @@ class Unit(abc.ABC):
     
     def get_unit_type(self):
         """
-        Returns the unit type
+        Returns the unit type.
         """
         return self.unit_type
+    
+    def get_direction(self):
+        """
+        Returns the direction that the unit is heading towards.
+        """
+        vec_direction = (screenpos.Coords(*self.next_pos) - screenpos.Coords(*self.cur_pos)).get()
+        if vec_direction == (0, 0) or vec_direction == (0,1):
+            return enums.Direction.RIGHT
+        elif vec_direction == (-1, 0):
+            return enums.Direction.UP
+        elif vec_direction == (0, -1):
+            return enums.Direction.LEFT
+        elif vec_direction == (1, 0):
+            return enums.Direction.DOWN
 
 
 class Infantry(Unit):
