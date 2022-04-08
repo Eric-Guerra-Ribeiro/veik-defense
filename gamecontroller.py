@@ -26,9 +26,17 @@ class GameController:
             tower.find_target(self.units)
             tower.shoot()
 
-    def spawn_troop(self):
+    def spawn_infantry(self):
         # Temporary function for testing TODO Remove this function
         self.units.append(unit.Infantry(self.bf_map))
+    
+    def spawn_airforce(self):
+    # Temporary function for testing TODO Remove this function
+        self.units.append(unit.AirForce(self.bf_map))
+
+    def spawn_tank(self):
+    # Temporary function for testing TODO Remove this function
+        self.units.append(unit.Armory(self.bf_map))
 
     def spawn_mgun(self, pos):
         # Temporary function for testing TODO Remove this function
@@ -37,6 +45,14 @@ class GameController:
     def spawn_cannon(self, pos):
         # Temporary function for testing TODO Remove this function
         self.towers.append(tower.Cannon(self.bf_map, pos))
+
+    def spawn_antitank(self, pos):
+        # Temporary function for testing TODO Remove this function
+        self.towers.append(tower.AntiTank(self.bf_map, pos))
+
+    def spawn_missile(self, pos):
+        # Temporary function for testing TODO Remove this function
+        self.towers.append(tower.Missile(self.bf_map, pos))
 
     def get_map(self):
         """

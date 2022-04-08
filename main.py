@@ -19,6 +19,8 @@ def main():
      #TODO: Change this
     game.spawn_mgun((2, 1))
     game.spawn_cannon((2, 7))
+    game.spawn_antitank((3, 8))
+    game.spawn_missile((2, 5))
     while game.is_running():
         clock.tick(pgc.FREQUENCY)
         arts.draw()
@@ -28,7 +30,11 @@ def main():
                 game.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    game.spawn_troop()
+                    game.spawn_infantry()
+                if event.key == pygame.K_v:
+                    game.spawn_tank()
+                if event.key == pygame.K_b:
+                    game.spawn_airforce()
 
 
 if __name__ == "__main__":

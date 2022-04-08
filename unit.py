@@ -108,3 +108,27 @@ class Infantry(Unit):
         self.speed = gc.BASE_SPEED
         self.armor = gc.BASE_ARMOR
         self.unit_type = enums.Unit.INFANTRY
+
+class AirForce(Unit):
+    """
+    Basic air force unit
+    """
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.max_health = gc.BASE_HEALTH
+        self.health = self.max_health
+        self.speed = gc.BASE_SPEED * 2
+        self.armor = gc.BASE_ARMOR / 2
+        self.unit_type = enums.Unit.AIR_FORCE
+
+class Armory(Unit):
+    """
+    Basic armored unit
+    """
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.max_health = gc.BASE_HEALTH
+        self.health = self.max_health
+        self.speed = gc.BASE_SPEED / 2
+        self.armor = gc.BASE_ARMOR * 5
+        self.unit_type = enums.Unit.ARMORED

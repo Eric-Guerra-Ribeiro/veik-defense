@@ -26,7 +26,8 @@ class Tower(enum.Enum):
     """
     MACHINE_GUN = enum.auto()
     CANNON = enum.auto()
-
+    ANTI_TANK = enum.auto()
+    MISSILE = enum.auto()
 
 class GameState(enum.Enum):
     """
