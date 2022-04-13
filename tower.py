@@ -109,7 +109,8 @@ class Missile(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = gc.BASE_FIRE_RATE * 2
+        self.range = 1.5*gc.BASE_RANGE
+        self.fire_rate = gc.BASE_FIRE_RATE
         self.dmg = gc.BASE_TDMG * 10
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MISSILE

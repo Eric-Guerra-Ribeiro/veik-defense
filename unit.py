@@ -142,6 +142,5 @@ class Armory(Unit):
         self.armor = gc.BASE_ARMOR * 4
         self.unit_type = enums.Unit.ARMORED
         self.dmg = gc.BASE_DMG
-        self.pierc_dict = {enums.Tower.ANTI_TANK : 3,
-                            enums.Tower.MACHINE_GUN : 0.5,
-                            enums.Tower.CANNON : 1.5}
+        self.pierc_dict = {enums.Tower.ANTI_TANK : 2,
+                            enums.Tower.MACHINE_GUN : 0.4}
