@@ -10,10 +10,10 @@ class Art():
     """
     Class that handles all art assets of the game (visual and sounds).
     """
-    def __init__(self, screen, game, inputs):
+    def __init__(self, screen, game, inputs_):
         self.screen = screen
         self.game = game
-        self.inputs = inputs
+        self.input = inputs_
         self.map_img = self.make_map_surface(game.get_map())
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
@@ -116,7 +116,7 @@ class Art():
         self.screen.blit(pygame.image.load("sprites/general/heart.png"), pgc.ALLY_CAMP_HP_POS)
 
     def draw_buttons(self):
-        for button in self.inputs.get_buttons():
+        for button in self.input.get_buttons():
             self.screen.blit(button.content, button.pos)
 
     def draw(self):

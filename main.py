@@ -3,7 +3,7 @@ import pygame
 import pygameconstants as pgc
 import gamecontroller
 import art
-import input
+import inputs
 
 
 def main():
@@ -29,16 +29,15 @@ def main():
     game = gamecontroller.GameController()
     screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
     bkgmusic = art.BackgroundMusic()
-    inputs = input.Input(game)
-    arts = art.Art(screen, game, inputs)
-     #TODO: Change this
+    input_sys = inputs.Input(game)
+    arts = art.Art(screen, game, input_sys)
     while game.running:
         if game.go:
             show_go_screen()
             game.reset()
         clock.tick(pgc.FREQUENCY)
         game.run()
-        inputs.input()
+        input_sys.input()
         arts.draw()
 
 if __name__ == "__main__":
