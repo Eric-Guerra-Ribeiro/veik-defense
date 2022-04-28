@@ -2,6 +2,7 @@ import pygame
 import random
 
 import pygameconstants as pgc
+import gameconstants as gc
 import enums
 import screenpos
 import utils
@@ -18,24 +19,8 @@ class Art():
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
         self.regular_font = pygame.font.Font('freesansbold.ttf', 30)
+        self.big_font = pygame.font.Font('freesansbold.ttf', 50)
         self.tower_sounds = self.make_tower_sounds()
-
-
-    def draw_game_over_text(self):
-        """
-        Draws game over text on screen.
-        """
-        font1 = pygame.font.Font('freesansbold.ttf', 50)
-        text = font1.render('GAME OVER', True, pgc.RED)
-        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/3))
-
-        font2 = pygame.font.Font('freesansbold.ttf', 35)
-        text = font2.render('Aperte qualquer tecla para reiniciar', True, pgc.RED)
-        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
-
-        pygame.display.flip()
-
-
 
     def make_map_surface(self, bf_map):
         """
@@ -136,6 +121,18 @@ class Art():
         Draws all elements in screen.
         """
         self.screen.fill(pgc.BLACK)
+        if self.game.game_state == enums.GameState.GRACE_PERIOD:
+            self.draw_playing()
+            self.draw_wave_text()
+        elif self.game.game_state == enums.GameState.PLAYING:
+            self.draw_playing()
+        self.draw_buttons()
+        pygame.display.flip()
+
+    def draw_playing(self):
+        """
+        Draws the elements in the screen in the playing state
+        """
         self.screen.blit(self.map_img, pgc.MAP_CORNER_POS)
 
         for unit in self.game.units:
@@ -155,6 +152,26 @@ class Art():
         self.draw_ally_camp_hp_bar()
         self.draw_buttons()
         self.draw_resource_number()
+
+    def draw_wave_text(self):
+        """
+        Draws wave number in text
+        """
+        text = self.big_font.render(f"WAVE {self.game.waves.get_wave_n()}", True, pgc.RED)
+        self.screen.blit(
+            text, (pgc.MAP_CORNER_POS[0] + (pgc.GRID_SIZE*gc.MAP_WIDTH - text.get_width())//2,
+                   pgc.MAP_CORNER_POS[1] + (pgc.GRID_SIZE*gc.MAP_HEIGHT - text.get_height())//2)
+        )
+
+    def draw_game_over_text(self):
+        """
+        Draws game over text on screen.
+        """
+        text = self.big_font.render('GAME OVER', True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/3))
+
+        text = self.regular_font.render('Aperte qualquer tecla para reiniciar', True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
 
         pygame.display.flip()
 

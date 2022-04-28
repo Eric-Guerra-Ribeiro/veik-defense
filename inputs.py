@@ -95,25 +95,23 @@ class Input:
         }
 
     def get_buttons(self):
+        if self.game.game_state == enums.GameState.GRACE_PERIOD:
+            return self.buttons[enums.GameState.PLAYING]
         return self.buttons[self.game.game_state]
 
     def input(self):
         """
         Reads the input accoring to game state.
         """
-        if self.game.game_state == enums.GameState.PLAYING:
+        if (self.game.game_state == enums.GameState.PLAYING
+            or self.game.game_state == enums.GameState.GRACE_PERIOD):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.game.running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        self.game.spawn_infantry()
-                    elif event.key == pygame.K_v:
-                        self.game.spawn_tank()
-                    elif event.key == pygame.K_b:
-                        self.game.spawn_airforce()
-                    elif event.key == pygame.K_c:
-                        self.game.selected_tower = self.game.selected_tower.succ()
+                        # TODO Pause game
+                        pass
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for board in self.boards[enums.GameState.PLAYING]:
                         board.press(pygame.mouse.get_pos())

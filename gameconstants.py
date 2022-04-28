@@ -1,4 +1,5 @@
 import pygameconstants as pgc
+
 # Map/Grid Constants
 MAP_HEIGHT = 9
 MAP_WIDTH = 16
@@ -14,10 +15,13 @@ AP_EFFECTIVENESS = 2.0
 BASE_RESOURCE = 100000000
 
 # Tower Stats
-
 BASE_FIRE_RATE = 1/(2 * pgc.FREQUENCY)
 BASE_TDMG = 0.10
 BASE_RANGE = 3.0
 BASE_PRICE = 500
+
+# Wave Stats
+WAVE_GRACE_PERIOD = 5 # seconds
+WAVE_GRACE_PROGRESS = 1/(WAVE_GRACE_PERIOD*pgc.FREQUENCY)
 
 EPSILON = 1e-6
