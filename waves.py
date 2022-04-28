@@ -97,7 +97,7 @@ class WaveController:
         """
         Getter for current wave number.
         """
-        return self.n_curr_wave
+        return self.n_curr_wave + 1
 
     def get_total_wave_n(self):
         """
