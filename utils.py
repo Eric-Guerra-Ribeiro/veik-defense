@@ -49,6 +49,19 @@ def add_tower(map_cell, game):
             game.towers.append(tower.Missile(game.bf_map, map_cell))
             game.decrease_resources(tower.Missile.price)
 
+def update_tower(map_cell, game):
+    "Updates a tower in map"
+    if not game.are_cells_empty(map_cell, 1):
+        for index, curr_tower in enumerate(game.towers):
+            if curr_tower.pos == map_cell and game.resources >= curr_tower.update_price:
+                price = curr_tower.update_price
+                if curr_tower.tower_type == enums.Tower.MACHINE_GUN_LVL1:
+                    game.towers[index] = tower.MachineGunLvl2(game.bf_map, map_cell)
+                elif curr_tower.tower_type == enums.Tower.MACHINE_GUN_LVL2:
+                    game.towers[index] = tower.MachineGunLvl3(game.bf_map, map_cell)
+
+                game.decrease_resources(price)
+                break
 
 def select_tower(game, tower):
     """
