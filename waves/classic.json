@@ -1,0 +1,17 @@
+[
+    [
+        {"n_units" : 10, "rate" : 0.5}, {"infantry" : 1}
+    ],
+    [
+        {"n_units" : 20, "rate" : 1}, {"infantry" : 9, "armored" : 1}
+    ],
+    [
+        {"n_units" : 30, "rate" : 2}, {"infantry" : 7, "armored" : 3}
+    ],
+    [
+        {"n_units" : 40, "rate" : 4}, {"infantry" : 6, "armored" : 3, "air_force" : 1}
+    ],
+    [
+        {"n_units" : 50, "rate" : 5}, {"infantry" : 4, "armored" : 3, "air_force" : 3}
+    ]
+]

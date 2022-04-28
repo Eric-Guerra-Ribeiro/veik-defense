@@ -2,6 +2,7 @@ import battlefieldmap
 import unit
 import tower
 import enums
+import waves
 
 
 class GameController:
@@ -21,10 +22,11 @@ class GameController:
         self.towers = []
         self.selected_tower = enums.Tower.MACHINE_GUN
         self.game_state = enums.GameState.PLAYING
+        self.waves = waves.WaveController("waves/classic.json", self)
 
 
     def run(self):
-        # Temporary function for testing TODO remove or improve
+        self.waves.run()
         for index, troop in enumerate(self.units):
             if not troop.alive:
                 del self.units[index]
@@ -36,33 +38,16 @@ class GameController:
         if not self.bf_map.ally_camp.alive:
             self.go = True
 
-    def spawn_infantry(self):
-        # Temporary function for testing TODO Remove this function
-        self.units.append(unit.Infantry(self.bf_map))
-    
-    def spawn_airforce(self):
-    # Temporary function for testing TODO Remove this function
-        self.units.append(unit.AirForce(self.bf_map))
-
-    def spawn_tank(self):
-    # Temporary function for testing TODO Remove this function
-        self.units.append(unit.Armory(self.bf_map))
-
-    def spawn_mgun(self, pos):
-        # Temporary function for testing TODO Remove this function
-        self.towers.append(tower.MachineGun(self.bf_map, pos))
-
-    def spawn_cannon(self, pos):
-        # Temporary function for testing TODO Remove this function
-        self.towers.append(tower.Cannon(self.bf_map, pos))
-
-    def spawn_antitank(self, pos):
-        # Temporary function for testing TODO Remove this function
-        self.towers.append(tower.AntiTank(self.bf_map, pos))
-
-    def spawn_missile(self, pos):
-        # Temporary function for testing TODO Remove this function
-        self.towers.append(tower.Missile(self.bf_map, pos))
+    def spawn_unit(self, type):
+        """
+        Spawns a unit of type
+        """
+        if type == enums.Unit.INFANTRY:
+            self.units.append(unit.Infantry(self.bf_map))
+        elif type == enums.Unit.ARMORED:
+            self.units.append(unit.Armory(self.bf_map))
+        elif type == enums.Unit.AIR_FORCE:
+            self.units.append(unit.AirForce(self.bf_map))
 
     def get_map(self):
         """
