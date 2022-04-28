@@ -20,6 +20,8 @@ BASE_FIRE_RATE = 1/(2 * pgc.FREQUENCY)
 BASE_TDMG = 0.10
 BASE_RANGE = 3.0
 BASE_PRICE = 500
+
+# Economy Stats
 BASE_RESOURCE = 1000
 
 # Wave Stats
