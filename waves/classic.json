@@ -12,6 +12,12 @@
         {"n_units" : 40, "rate" : 4}, {"infantry" : 6, "armored" : 3, "air_force" : 1}
     ],
     [
-        {"n_units" : 50, "rate" : 5}, {"infantry" : 4, "armored" : 3, "air_force" : 3}
+        {"n_units" : 50, "rate" : 5}, {"infantry" : 4, "armored" : 3.5, "air_force" : 2.5}
+    ],
+    [
+        {"n_units" : 150, "rate" : 5.5}, {"infantry" : 4, "armored" : 3, "air_force" : 3}
+    ],
+    [
+        {"n_units" : 250, "rate" : 6}, {"infantry" : 4, "armored" : 3, "air_force" : 3}
     ]
 ]
