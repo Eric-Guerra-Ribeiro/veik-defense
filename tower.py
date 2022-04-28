@@ -83,7 +83,7 @@ class Cannon(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = gc.BASE_FIRE_RATE*2
+        self.fire_rate = gc.BASE_FIRE_RATE*1.5
         self.dmg = gc.BASE_TDMG * 5
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.CANNON
@@ -93,7 +93,7 @@ class AntiTank(Tower):
     Armored defense tower.
     """
 
-    price = gc.BASE_PRICE * 2
+    price = gc.BASE_PRICE * 10
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
@@ -111,7 +111,7 @@ class Missile(Tower):
     Air force defense tower.
     """
 
-    price = gc.BASE_PRICE * 3
+    price = gc.BASE_PRICE * 8
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)

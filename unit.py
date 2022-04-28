@@ -146,4 +146,4 @@ class Armory(Unit):
         self.unit_type = enums.Unit.ARMORED
         self.dmg = gc.BASE_DMG
         self.pierc_dict = {enums.Tower.ANTI_TANK : 2,
-                            enums.Tower.MACHINE_GUN : 0.4}
+                            enums.Tower.MACHINE_GUN : 0.3}
