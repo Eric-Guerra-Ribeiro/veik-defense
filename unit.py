@@ -129,7 +129,7 @@ class AirForce(Unit):
         self.armor = gc.BASE_ARMOR * 2
         self.unit_type = enums.Unit.AIR_FORCE
         self.dmg = gc.BASE_DMG
-        self.pierc_dict = {enums.Tower.MISSILE : 3}
+        self.pierc_dict = {enums.Tower.MISSILE_LVL1 : 3}
 
 class Armory(Unit):
     """
@@ -144,5 +144,5 @@ class Armory(Unit):
         self.armor = gc.BASE_ARMOR * 4
         self.unit_type = enums.Unit.ARMORED
         self.dmg = gc.BASE_DMG
-        self.pierc_dict = {enums.Tower.ANTI_TANK : 2,
+        self.pierc_dict = {enums.Tower.ANTI_TANK_LVL1 : 2,
                             enums.Tower.MACHINE_GUN_LVL1 : 0.3}

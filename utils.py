@@ -40,11 +40,11 @@ def add_tower(map_cell, game):
             game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.CannonLvl1(game.bf_map, map_cell))
             game.decrease_resources(tower.CannonLvl1.price)
-        elif game.selected_tower == enums.Tower.ANTI_TANK and game.resources >= tower.AntiTank.price:
+        elif game.selected_tower == enums.Tower.ANTI_TANK_LVL1 and game.resources >= tower.AntiTankLvl1.price:
             game.ocupy_cells(map_cell, 1)
-            game.towers.append(tower.AntiTank(game.bf_map, map_cell))
-            game.decrease_resources(tower.AntiTank.price)
-        elif game.selected_tower == enums.Tower.MISSILE and game.resources >= tower.Missile.price:
+            game.towers.append(tower.AntiTankLvl1(game.bf_map, map_cell))
+            game.decrease_resources(tower.AntiTankLvl1.price)
+        elif game.selected_tower == enums.Tower.MISSILE_LVL1 and game.resources >= tower.Missile.price:
             game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.Missile(game.bf_map, map_cell))
             game.decrease_resources(tower.Missile.price)
@@ -63,6 +63,8 @@ def update_tower(map_cell, game):
                     game.towers[index] = tower.CannonLvl2(game.bf_map, map_cell)
                 elif curr_tower.tower_type == enums.Tower.CANNON_LVL2:
                     game.towers[index] = tower.CannonLvl3(game.bf_map, map_cell)
+                elif curr_tower.tower_type == enums.Tower.ANTI_TANK_LVL1:
+                    game.towers[index] = tower.AntiTankLvl2(game.bf_map, map_cell)
 
                 game.decrease_resources(price)
                 break

@@ -30,8 +30,10 @@ class Tower(enum.Enum):
     CANNON_LVL1 = enum.auto()
     CANNON_LVL2 = enum.auto()
     CANNON_LVL3 = enum.auto()
-    ANTI_TANK = enum.auto()
-    MISSILE = enum.auto()
+    ANTI_TANK_LVL1 = enum.auto()
+    ANTI_TANK_LVL2 = enum.auto()
+    MISSILE_LVL1 = enum.auto()
+    MISSILE_LVL2 = enum.auto()
     COAL_FACTORY = enum.auto()
     NUCLEAR_PLANT = enum.auto()
 
