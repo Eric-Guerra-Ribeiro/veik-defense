@@ -66,7 +66,7 @@ class MachineGunLvl1(Tower):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = 10*gc.BASE_FIRE_RATE
+        self.fire_rate = gc.BASE_FIRE_RATE * 10
         self.dmg = gc.BASE_TDMG
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MACHINE_GUN_LVL1
@@ -87,7 +87,7 @@ class MachineGunLvl2(Tower):
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MACHINE_GUN_LVL2
         self.cant_shoot.append(enums.Unit.AIR_FORCE)
-        self.update_price = 2*gc.BASE_PRICE
+        self.update_price = 2.5*gc.BASE_PRICE
 
 class MachineGunLvl3(Tower):
     """
@@ -99,7 +99,7 @@ class MachineGunLvl3(Tower):
         self.pos = pos
 
         self.fire_rate = 15*gc.BASE_FIRE_RATE
-        self.dmg = gc.BASE_TDMG*1.8
+        self.dmg = gc.BASE_TDMG*1.5
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MACHINE_GUN_LVL3
         self.cant_shoot.append(enums.Unit.AIR_FORCE)

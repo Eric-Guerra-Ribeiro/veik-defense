@@ -63,8 +63,8 @@ class Art():
         Creates surfaces with an image of each tower type.
         """
         mgunlvl1_sur = pygame.image.load("sprites/tower/machinegun0.png")
-        mgunlvl2_sur = pygame.image.load("sprites/tower/124.png")
-        mgunlvl3_sur = pygame.image.load("sprites/tower/antitank1.png")
+        mgunlvl2_sur = pygame.image.load("sprites/tower/machinegun1.png")
+        mgunlvl3_sur = pygame.image.load("sprites/tower/machinegun2.png")
         cannon_sur = pygame.image.load("sprites/tower/cannon0.png")
         antitank_sur = pygame.image.load("sprites/tower/antitank0.png")
         missile_sur = pygame.image.load("sprites/tower/missile0.png")
