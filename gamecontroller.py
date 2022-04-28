@@ -1,4 +1,5 @@
 import battlefieldmap
+from gameconstants import BASE_RESOURCE
 import unit
 import tower
 import enums
@@ -21,7 +22,7 @@ class GameController:
         self.towers = []
         self.selected_tower = enums.Tower.MACHINE_GUN
         self.game_state = enums.GameState.PLAYING
-
+        self.resources = BASE_RESOURCE
 
     def run(self):
         # Temporary function for testing TODO remove or improve
@@ -63,6 +64,12 @@ class GameController:
     def spawn_missile(self, pos):
         # Temporary function for testing TODO Remove this function
         self.towers.append(tower.Missile(self.bf_map, pos))
+    
+    def increase_resources(self, nmb):
+        self.resources += nmb
+    
+    def decrease_resources(self, nmb):
+        self.resources -= nmb
 
     def get_map(self):
         """

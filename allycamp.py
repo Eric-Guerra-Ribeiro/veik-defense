@@ -24,3 +24,7 @@ class AllyCamp():
       def die(self):
             self.alive = False
 
+
+
+
+

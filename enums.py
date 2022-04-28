@@ -28,7 +28,9 @@ class Tower(enum.Enum):
     CANNON = enum.auto()
     ANTI_TANK = enum.auto()
     MISSILE = enum.auto()
-    
+    COAL_FACTORY = enum.auto()
+    NUCLEAR_PLANT = enum.auto()
+
     def succ(self):
         v = self.value + 1
         try:   

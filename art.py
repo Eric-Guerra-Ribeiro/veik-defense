@@ -81,8 +81,11 @@ class Art():
         cannon_sur = pygame.image.load("sprites/tower/cannon0.png")
         antitank_sur = pygame.image.load("sprites/tower/antitank0.png")
         missile_sur = pygame.image.load("sprites/tower/missile0.png")
+        nuclearpp_sur = pygame.image.load("sprites/general/nuclearplant.png")
+        coalfactory_sur = pygame.image.load("sprites/general/factory.png")
         return {enums.Tower.MACHINE_GUN: mgun_sur, enums.Tower.CANNON: cannon_sur,
-                enums.Tower.ANTI_TANK: antitank_sur, enums.Tower.MISSILE: missile_sur}
+                enums.Tower.ANTI_TANK: antitank_sur, enums.Tower.MISSILE: missile_sur,
+                enums.Tower.NUCLEAR_PLANT: nuclearpp_sur, enums.Tower.COAL_FACTORY: coalfactory_sur}
     
     def make_tower_sounds(self):
         """
@@ -114,6 +117,15 @@ class Art():
         text = self.regular_font.render(str(perc) + '%', True, pgc.RED)
         self.screen.blit(text, pgc.ALLY_CAMP_HP_PERC_POS)
         self.screen.blit(pygame.image.load("sprites/general/heart.png"), pgc.ALLY_CAMP_HP_POS)
+    
+    def draw_resource_number(self):
+        """
+        Draws ally's camp resources number.
+        """
+        resource_number = self.game.resources
+        text = self.regular_font.render(str(resource_number), True, pgc.YELLOW)
+        self.screen.blit(text, pgc.ALLY_CAMP_RESOURCE_NUMBER_POS)
+        self.screen.blit(pygame.image.load("sprites/general/coin.png"), pgc.ALLY_CAMP_RESOURCE_POS)
 
     def draw_buttons(self):
         for button in self.input.get_buttons():
@@ -125,10 +137,7 @@ class Art():
         """
         self.screen.fill(pgc.BLACK)
         self.screen.blit(self.map_img, pgc.MAP_CORNER_POS)
-        
-        
 
-        self.draw_ally_camp_hp_bar()
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.screen.blit(
@@ -142,8 +151,10 @@ class Art():
             self.screen.blit(
                 self.tower_imgs[tower.get_tower_type()], tower_pos
             )
-        
+    
+        self.draw_ally_camp_hp_bar()
         self.draw_buttons()
+        self.draw_resource_number()
 
         pygame.display.flip()
 
