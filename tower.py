@@ -16,6 +16,7 @@ class Tower(abc.ABC):
         self.range = gc.BASE_RANGE
         self.shoot_progress = 0
         self.cant_shoot = []
+        self.level = 1
 
     def in_range(self, pos):
         dist2 = (self.pos[0] - pos[0])**2 + (self.pos[1] - pos[1])**2
@@ -54,12 +55,13 @@ class Tower(abc.ABC):
     def get_tower_type(self):
         return self.tower_type
 
-class MachineGun(Tower):
+class MachineGunLvl1(Tower):
     """
     Machine gun defense tower.
     """
 
     price = gc.BASE_PRICE
+    update_price = gc.BASE_PRICE
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
@@ -68,8 +70,24 @@ class MachineGun(Tower):
         self.fire_rate = 10*gc.BASE_FIRE_RATE
         self.dmg = gc.BASE_TDMG
         self.size = gc.BASE_SIZE
-        self.tower_type = enums.Tower.MACHINE_GUN
+        self.tower_type = enums.Tower.MACHINE_GUN_LVL1
         self.cant_shoot.append(enums.Unit.AIR_FORCE)
+
+class MachineGunLvl2(Tower):
+    """
+    Machine gun defense tower Level 2.
+    """
+
+    def __init__(self, bf_map, pos):
+        super().__init__(bf_map, pos)
+        self.pos = pos
+
+        self.fire_rate = 12*gc.BASE_FIRE_RATE
+        self.dmg = gc.BASE_TDMG*1.3
+        self.size = gc.BASE_SIZE
+        self.tower_type = enums.Tower.MACHINE_GUN_LVL1
+        self.cant_shoot.append(enums.Unit.AIR_FORCE)
+
 
 
 class Cannon(Tower):

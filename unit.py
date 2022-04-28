@@ -55,7 +55,6 @@ class Unit(abc.ABC):
         """
         Make so the unit dies.
         """
-        # TODO implement
         self.alive = False
     
     def get_move_prog(self):
@@ -146,4 +145,4 @@ class Armory(Unit):
         self.unit_type = enums.Unit.ARMORED
         self.dmg = gc.BASE_DMG
         self.pierc_dict = {enums.Tower.ANTI_TANK : 2,
-                            enums.Tower.MACHINE_GUN : 0.3}
+                            enums.Tower.MACHINE_GUN_LVL1 : 0.3}

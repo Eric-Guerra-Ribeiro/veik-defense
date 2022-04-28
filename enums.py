@@ -24,7 +24,8 @@ class Tower(enum.Enum):
     """
     Enum class for the types of towers.
     """
-    MACHINE_GUN = enum.auto()
+    MACHINE_GUN_LVL1 = enum.auto()
+    MACHINE_GUN_LVL2 = enum.auto()
     CANNON = enum.auto()
     ANTI_TANK = enum.auto()
     MISSILE = enum.auto()

@@ -21,7 +21,7 @@ class GameController:
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
-        self.selected_tower = enums.Tower.MACHINE_GUN
+        self.selected_tower = enums.Tower.MACHINE_GUN_LVL1
         self.resources = BASE_RESOURCE
         self._game_state = enums.GameState.GRACE_PERIOD
         self.waves = waves.WaveController("waves/classic.json", self)
