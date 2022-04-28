@@ -32,17 +32,20 @@ def add_tower(map_cell, game):
     if game.selected_tower is None:
         return
     if game.are_cells_empty(map_cell, 1):
-        game.ocupy_cells(map_cell, 1)
         if game.selected_tower == enums.Tower.MACHINE_GUN and game.resources >= tower.MachineGun.price:
+            game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.MachineGun(game.bf_map, map_cell))
             game.decrease_resources(tower.MachineGun.price)
         elif game.selected_tower == enums.Tower.CANNON and game.resources >= tower.Cannon.price:
+            game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.Cannon(game.bf_map, map_cell))
             game.decrease_resources(tower.Cannon.price)
         elif game.selected_tower == enums.Tower.ANTI_TANK and game.resources >= tower.AntiTank.price:
+            game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.AntiTank(game.bf_map, map_cell))
             game.decrease_resources(tower.AntiTank.price)
         elif game.selected_tower == enums.Tower.MISSILE and game.resources >= tower.Missile.price:
+            game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.Missile(game.bf_map, map_cell))
             game.decrease_resources(tower.Missile.price)
 

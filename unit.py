@@ -107,6 +107,7 @@ class Infantry(Unit):
     """
     Basic infantry unit
     """
+    resource_reward = gc.BASE_RESOURCE_REWARD
     def __init__(self, bf_map):
         super().__init__(bf_map)
         self.max_health = gc.BASE_HEALTH
@@ -120,6 +121,7 @@ class AirForce(Unit):
     """
     Basic air force unit
     """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2
     def __init__(self, bf_map):
         super().__init__(bf_map)
         self.max_health = gc.BASE_HEALTH
@@ -134,6 +136,7 @@ class Armory(Unit):
     """
     Basic armored unit
     """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2
     def __init__(self, bf_map):
         super().__init__(bf_map)
         self.max_health = gc.BASE_HEALTH

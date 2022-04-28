@@ -28,12 +28,14 @@ class GameController:
         # Temporary function for testing TODO remove or improve
         for index, troop in enumerate(self.units):
             if not troop.alive:
+                self.increase_resources(self.units[index].resource_reward)
                 del self.units[index]
             else:
                 troop.move()
         for tower in self.towers:
             tower.find_target(self.units)
             tower.shoot()
+            
         if not self.bf_map.ally_camp.alive:
             self.go = True
 
