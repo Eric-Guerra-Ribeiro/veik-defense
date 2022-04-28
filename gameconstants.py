@@ -22,7 +22,7 @@ BASE_RANGE = 3.0
 BASE_PRICE = 500
 
 # Economy Stats
-BASE_RESOURCE = 100000
+BASE_RESOURCE = 1000
 
 # Wave Stats
 WAVE_GRACE_PERIOD = 5 # seconds

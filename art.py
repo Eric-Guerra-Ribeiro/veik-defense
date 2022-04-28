@@ -70,13 +70,15 @@ class Art():
         cannonlvl3_sur = pygame.image.load("sprites/tower/cannon2.png")
         antitanklvl1_sur = pygame.image.load("sprites/tower/antitank0.png")
         antitanklvl2_sur = pygame.image.load("sprites/tower/antitank1.png")
-        missile_sur = pygame.image.load("sprites/tower/missile0.png")
+        missilelvl1_sur = pygame.image.load("sprites/tower/missile0.png")
+        missilelvl2_sur = pygame.image.load("sprites/tower/missile1.png")
         nuclearpp_sur = pygame.image.load("sprites/general/nuclearplant.png")
         coalfactory_sur = pygame.image.load("sprites/general/factory.png")
         return {enums.Tower.MACHINE_GUN_LVL1: mgunlvl1_sur, enums.Tower.MACHINE_GUN_LVL2: mgunlvl2_sur,
                 enums.Tower.MACHINE_GUN_LVL3: mgunlvl3_sur, enums.Tower.CANNON_LVL1: cannonlvl1_sur,
                 enums.Tower.CANNON_LVL2: cannonlvl2_sur, enums.Tower.CANNON_LVL3: cannonlvl3_sur,
-                enums.Tower.ANTI_TANK_LVL1: antitanklvl1_sur, enums.Tower.ANTI_TANK_LVL2: antitanklvl2_sur, enums.Tower.MISSILE_LVL1: missile_sur,
+                enums.Tower.ANTI_TANK_LVL1: antitanklvl1_sur, enums.Tower.ANTI_TANK_LVL2: antitanklvl2_sur, 
+                enums.Tower.MISSILE_LVL1: missilelvl1_sur, enums.Tower.MISSILE_LVL2: missilelvl2_sur,
                 enums.Tower.NUCLEAR_PLANT: nuclearpp_sur, enums.Tower.COAL_FACTORY: coalfactory_sur}
     
     def make_tower_sounds(self):
