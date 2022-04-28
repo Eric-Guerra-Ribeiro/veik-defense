@@ -79,12 +79,14 @@ class WaveController:
         """
         if self.game.game_state == enums.GameState.PLAYING:
             if self.wave.is_over():
-                self.n_curr_wave += 1
-                self.game.game_state = enums.GameState.GRACE_PERIOD
-                if self.n_curr_wave < self.n_waves:
-                    self.wave = Wave(self.waves_list[self.n_curr_wave], self.game)
-                else:
-                    self.game.game_state = enums.GameState.WIN
+                if not self.game.units:
+                    self.n_curr_wave += 1
+                    self.game.game_state = enums.GameState.GRACE_PERIOD
+                    if self.n_curr_wave < self.n_waves:
+                        self.wave = Wave(self.waves_list[self.n_curr_wave], self.game)
+                    else:
+                        return
+                        # TODO Add win state self.game.game_state = enums.GameState.WIN
             else:
                 self.wave.spawn()
         elif self.game.game_state == enums.GameState.GRACE_PERIOD:
