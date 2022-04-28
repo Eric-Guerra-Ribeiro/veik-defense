@@ -97,7 +97,7 @@ class Input:
                        lambda _game: None, game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 1*pgc.MENU_BUTTON_HEIGHT),
                        (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("TUTORIAL"),
-                       lambda _game: None, game)
+                       lambda _game: utils.begin_tutorial(_game), game)
             ],
             enums.GameState.PLAYING : [
                 Button((1100,100), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/machinegun0.png"),
@@ -138,7 +138,9 @@ class Input:
                         board.press(pygame.mouse.get_pos())
                     for button in self.buttons[enums.GameState.PLAYING]:
                         button.press(pygame.mouse.get_pos())
-            elif self.game.game_state == enums.GameState.GAME_OVER:
+            elif (self.game.game_state == enums.GameState.GAME_OVER
+                  or self.game.game_state == enums.GameState.TUTORIAL
+                  or self.game.game_state == enums.GameState.WIN):
                 if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
                     self.game.reset()
             elif self.game.game_state == enums.GameState.MENU:

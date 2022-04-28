@@ -22,6 +22,7 @@ class Art():
         self.big_font = pygame.font.Font('freesansbold.ttf', 50)
         self.menu_background = pygame.image.load("backgrounds/menu.png")
         self.game_over_background = pygame.image.load("backgrounds/game_over.png")
+        self.win_background = pygame.image.load("backgrounds/win.png")
         self.tower_sounds = self.make_tower_sounds()
 
     def make_map_surface(self, bf_map):
@@ -138,6 +139,10 @@ class Art():
             self.draw_game_over()
         elif self.game.game_state == enums.GameState.MENU:
             self.draw_menu()
+        elif self.game.game_state == enums.GameState.WIN:
+            self.draw_win()
+        elif self.game.game_state == enums.GameState.TUTORIAL:
+            self.draw_tutorial()
         self.draw_buttons()
         pygame.display.flip()
 
@@ -195,6 +200,28 @@ class Art():
         text = self.big_font.render('VEIK DEFENSE', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
 
+    def draw_win(self):
+        """
+        Draws win end screen.
+        """
+        self.screen.blit(self.win_background, (0, 0))
+
+        text = self.big_font.render('YOU WIN!', True, pgc.BLUE)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
+
+        text = self.regular_font.render("Press any key to restart", True, pgc.BLUE)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2 + 2*text.get_height()))
+
+    def draw_tutorial(self):
+        """
+        Draws the tutorial screen.
+        """
+        text = self.big_font.render('TUTORIAL', True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
+        text = self.big_font.render('SE VIRA BIXO!', True, pgc.BLUE)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
+        text = self.regular_font.render("Press any key to restart", True, pgc.BLUE)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2 + 2*text.get_height()))
 
 
 def BackgroundMusic():

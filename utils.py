@@ -75,3 +75,10 @@ def begin_challenge(game):
     """
     game.game_state = enums.GameState.GRACE_PERIOD
     game.waves = waves.WaveController("waves/endless.json", game)
+
+
+def begin_tutorial(game):
+    """
+    Shows the game's tutorial
+    """
+    game.game_state = enums.GameState.TUTORIAL
