@@ -12,7 +12,7 @@ def main():
     """
 
     def show_go_screen():
-        arts.draw_game_over_text()
+        arts.draw_game_over()
         waiting = True
         while waiting:
             clock.tick(pgc.FREQUENCY)
@@ -32,9 +32,6 @@ def main():
     input_sys = inputs.Input(game)
     arts = art.Art(screen, game, input_sys)
     while game.running:
-        if game.go:
-            show_go_screen()
-            game.reset()
         clock.tick(pgc.FREQUENCY)
         game.run()
         input_sys.input()

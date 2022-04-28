@@ -1,5 +1,6 @@
 import enums
 import tower
+import waves
 
 def valid_index(index, list_dim):
     """
@@ -58,3 +59,19 @@ def select_tower(game, tower):
         game.selected_tower = None
     else:
         game.selected_tower = tower
+
+
+def begin_campaign(game):
+    """
+    Starts the game on campaign mode
+    """
+    game.game_state = enums.GameState.GRACE_PERIOD
+    game.waves = waves.WaveController("waves/classic.json", game)
+
+
+def begin_challenge(game):
+    """
+    Starts the game on challenge mode
+    """
+    game.game_state = enums.GameState.GRACE_PERIOD
+    game.waves = waves.WaveController("waves/endless.json", game)

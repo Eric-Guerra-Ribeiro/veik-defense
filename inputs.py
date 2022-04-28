@@ -1,9 +1,12 @@
+import collections
+
 import pygame
 
 import enums
 import utils
 import gameconstants as gc
 import pygameconstants as pgc
+import art
 
 class Button:
     """
@@ -81,7 +84,21 @@ class Input:
                 Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.add_tower, self.game)
             ]
         }
-        self.buttons = {
+        buttons = {
+            enums.GameState.MENU : [
+                Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 - 2*pgc.MENU_BUTTON_HEIGHT),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CAMPAIGN"),
+                       lambda _game: utils.begin_campaign(_game), game),
+                Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 - 1*pgc.MENU_BUTTON_HEIGHT),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CHALLENGE"),
+                       lambda _game: utils.begin_challenge(_game), game),
+                Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 0*pgc.MENU_BUTTON_HEIGHT),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("MAP EDITOR"),
+                       lambda _game: None, game),
+                Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 1*pgc.MENU_BUTTON_HEIGHT),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("TUTORIAL"),
+                       lambda _game: None, game)
+            ],
             enums.GameState.PLAYING : [
                 Button((1100,100), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/machinegun0.png"),
                        lambda _game: utils.select_tower(_game, enums.Tower.MACHINE_GUN), game),
@@ -95,6 +112,8 @@ class Input:
             ]
         }
 
+        self.buttons = collections.defaultdict(lambda: [], buttons)
+
     def get_buttons(self):
         if self.game.game_state == enums.GameState.GRACE_PERIOD:
             return self.buttons[enums.GameState.PLAYING]
@@ -104,12 +123,13 @@ class Input:
         """
         Reads the input accoring to game state.
         """
-        if (self.game.game_state == enums.GameState.PLAYING
-            or self.game.game_state == enums.GameState.GRACE_PERIOD):
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.game.running = False
-                elif event.type == pygame.KEYDOWN:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.game.running = False
+
+            if (self.game.game_state == enums.GameState.PLAYING
+                or self.game.game_state == enums.GameState.GRACE_PERIOD):
+                if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         # TODO Pause game
                         pass
@@ -117,4 +137,11 @@ class Input:
                     for board in self.boards[enums.GameState.PLAYING]:
                         board.press(pygame.mouse.get_pos())
                     for button in self.buttons[enums.GameState.PLAYING]:
+                        button.press(pygame.mouse.get_pos())
+            elif self.game.game_state == enums.GameState.GAME_OVER:
+                if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+                    self.game.reset()
+            elif self.game.game_state == enums.GameState.MENU:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    for button in self.buttons[enums.GameState.MENU]:
                         button.press(pygame.mouse.get_pos())

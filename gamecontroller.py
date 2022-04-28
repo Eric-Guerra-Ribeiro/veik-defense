@@ -17,29 +17,30 @@ class GameController:
     
     def reset(self):
         self.running = True
-        self.go = False
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
-        self.selected_tower = enums.Tower.MACHINE_GUN
+        self.selected_tower = None
         self.resources = BASE_RESOURCE
-        self._game_state = enums.GameState.GRACE_PERIOD
-        self.waves = waves.WaveController("waves/classic.json", self)
+        self._game_state = enums.GameState.MENU
+        self.waves = None
 
     def run(self):
-        self.waves.run()
-        for index, troop in enumerate(self.units):
-            if not troop.alive:
-                self.increase_resources(self.units[index].resource_reward)
-                del self.units[index]
-            else:
-                troop.move()
-        for tower in self.towers:
-            tower.find_target(self.units)
-            tower.shoot()
-            
-        if not self.bf_map.ally_camp.alive:
-            self.go = True
+        if (self._game_state == enums.GameState.PLAYING
+            or self._game_state == enums.GameState.GRACE_PERIOD):
+            self.waves.run()
+            for index, troop in enumerate(self.units):
+                if not troop.alive:
+                    self.increase_resources(self.units[index].resource_reward)
+                    del self.units[index]
+                else:
+                    troop.move()
+            for tower in self.towers:
+                tower.find_target(self.units)
+                tower.shoot()
+                
+            if not self.bf_map.ally_camp.alive:
+                self._game_state = enums.GameState.GAME_OVER
     
     def increase_resources(self, nmb):
         self.resources += nmb

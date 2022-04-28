@@ -20,6 +20,8 @@ class Art():
         self.tower_imgs = self.make_tower_imgs()
         self.regular_font = pygame.font.Font('freesansbold.ttf', 30)
         self.big_font = pygame.font.Font('freesansbold.ttf', 50)
+        self.menu_background = pygame.image.load("backgrounds/menu.png")
+        self.game_over_background = pygame.image.load("backgrounds/game_over.png")
         self.tower_sounds = self.make_tower_sounds()
 
     def make_map_surface(self, bf_map):
@@ -32,7 +34,7 @@ class Art():
         roadsprites = []
         for i in range(pgc.ROAD_SRITES):
             roadsprites.append(pygame.image.load("sprites/terrain/road{0}.png".format(i)))
-        map_img = pygame.Surface((pgc.GRID_SIZE*bf_map.width, (pgc.GRID_SIZE*bf_map.height)))
+        map_img = pygame.Surface((pgc.GRID_SIZE*bf_map.width, pgc.GRID_SIZE*bf_map.height))
         terrain_color = {
             enums.Terrain.ALLY_CAMP: pgc.ALLY_CAMP_COLOR,
             enums.Terrain.ENEMY_CAMP: pgc.ENEMY_CAMP_COLOR,
@@ -132,6 +134,10 @@ class Art():
             self.draw_wave_text()
         elif self.game.game_state == enums.GameState.PLAYING:
             self.draw_playing()
+        elif self.game.game_state == enums.GameState.GAME_OVER:
+            self.draw_game_over()
+        elif self.game.game_state == enums.GameState.MENU:
+            self.draw_menu()
         self.draw_buttons()
         pygame.display.flip()
 
@@ -169,20 +175,42 @@ class Art():
                    pgc.MAP_CORNER_POS[1] + (pgc.GRID_SIZE*gc.MAP_HEIGHT - text.get_height())//2)
         )
 
-    def draw_game_over_text(self):
+    def draw_game_over(self):
         """
         Draws game over text on screen.
         """
-        text = self.big_font.render('GAME OVER', True, pgc.RED)
-        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/3))
+        self.screen.blit(self.game_over_background, (0, 0))
 
-        text = self.regular_font.render('Aperte qualquer tecla para reiniciar', True, pgc.RED)
+        text = self.big_font.render('GAME OVER', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
 
-        pygame.display.flip()
+        text = self.regular_font.render("Press any key to restart", True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2 + 2*text.get_height()))
+
+    def draw_menu(self):
+        """
+        Draws the Menu
+        """
+        self.screen.blit(self.menu_background, (0, 0))
+        text = self.big_font.render('VEIK DEFENSE', True, pgc.RED)
+        self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
+
+
 
 def BackgroundMusic():
     backgroundmusic = pygame.mixer.music.load("sounds/BackgroundMusic_FibradeHeroi.ogg")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
     return backgroundmusic
+
+
+
+def menu_button_content(string):
+    """
+    Returns a pygame surface with a string for the size of the menu button.
+    """
+    regular_font = pygame.font.Font('freesansbold.ttf', 30)
+    text = regular_font.render(string, True, pgc.RED)
+    content = pygame.Surface((pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), pygame.SRCALPHA)
+    content.blit(text, ((pgc.MENU_BUTTON_WIDTH - text.get_width())/2 ,(pgc.MENU_BUTTON_HEIGHT - text.get_height())/2))
+    return content
