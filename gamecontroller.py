@@ -21,7 +21,7 @@ class GameController:
         self.units = []
         self.towers = []
         self.selected_tower = enums.Tower.MACHINE_GUN
-        self.game_state = enums.GameState.PLAYING
+        self._game_state = enums.GameState.GRACE_PERIOD
         self.waves = waves.WaveController("waves/classic.json", self)
 
 
@@ -65,6 +65,14 @@ class GameController:
     @running.setter
     def running(self, is_running):
         self._running = is_running
+
+    @property
+    def game_state(self):
+        return self._game_state
+    
+    @game_state.setter
+    def game_state(self, state):
+        self._game_state = state
 
     def are_cells_empty(self, map_cell, n):
         return self.bf_map.is_cells_square_empty(*map_cell, n)

@@ -4,6 +4,7 @@ import itertools
 
 import enums
 import pygameconstants as pgc
+import gameconstants as gc
 
 class Wave:
     """
@@ -70,15 +71,36 @@ class WaveController:
             self.waves_list = json.load(json_file)
         self.n_waves = len(self.waves_list)
         self.wave = Wave(self.waves_list[0], game)
+        self.grace_timer = 0
     
     def run(self):
         """
         Runs the wave controller
         """
-        if self.wave.is_over():
-            self.n_curr_wave += 1
-            if self.n_curr_wave < self.n_waves:
-                self.wave = Wave(self.waves_list[self.n_curr_wave], self.game)
+        if self.game.game_state == enums.GameState.PLAYING:
+            if self.wave.is_over():
+                self.n_curr_wave += 1
+                self.game.game_state = enums.GameState.GRACE_PERIOD
+                if self.n_curr_wave < self.n_waves:
+                    self.wave = Wave(self.waves_list[self.n_curr_wave], self.game)
+                else:
+                    self.game.game_state = enums.GameState.WIN
             else:
-                return
-        self.wave.spawn()
+                self.wave.spawn()
+        elif self.game.game_state == enums.GameState.GRACE_PERIOD:
+            self.grace_timer += gc.WAVE_GRACE_PROGRESS
+            if self.grace_timer >= 1:
+                self.game.game_state = enums.GameState.PLAYING
+                self.grace_timer = 0
+
+    def get_wave_n(self):
+        """
+        Getter for current wave number.
+        """
+        return self.n_curr_wave
+
+    def get_total_wave_n(self):
+        """
+        Getter for number of total waves.
+        """
+        return self.n_waves

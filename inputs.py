@@ -89,13 +89,16 @@ class Input:
         }
 
     def get_buttons(self):
+        if self.game.game_state == enums.GameState.GRACE_PERIOD:
+            return self.buttons[enums.GameState.PLAYING]
         return self.buttons[self.game.game_state]
 
     def input(self):
         """
         Reads the input accoring to game state.
         """
-        if self.game.game_state == enums.GameState.PLAYING:
+        if (self.game.game_state == enums.GameState.PLAYING
+            or self.game.game_state == enums.GameState.GRACE_PERIOD):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.game.running = False

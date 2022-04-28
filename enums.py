@@ -42,6 +42,8 @@ class GameState(enum.Enum):
     """
     MENU = enum.auto()
     PLAYING = enum.auto()
+    GRACE_PERIOD = enum.auto()
+    WIN = enum.auto()
 
 class Direction(enum.Enum):
     """
