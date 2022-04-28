@@ -82,6 +82,12 @@ class Art():
         missile_snd = pygame.mixer.Sound("sounds/AKShoot.ogg")
         return {enums.Tower.MACHINE_GUN: mgun_snd, enums.Tower.CANNON: cannon_snd,
                 enums.Tower.ANTI_TANK: antitank_snd, enums.Tower.MISSILE: missile_snd}
+
+    def tower_sound(self):
+        """
+        Play the unit shoot sound
+        """
+        self.tower_sounds[self.game.tower.get_tower_type()].play
     
     def hp_bar(self, pos, perc_hp):
         """
