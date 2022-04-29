@@ -37,9 +37,9 @@ class Art():
         for i in range(pgc.ROAD_SRITES):
             roadsprites.append(pygame.image.load("sprites/terrain/road{0}.png".format(i)))
         map_img = pygame.Surface((pgc.GRID_SIZE*bf_map.width, pgc.GRID_SIZE*bf_map.height))
-        terrain_color = {
-            enums.Terrain.ALLY_CAMP: pgc.ALLY_CAMP_COLOR,
-            enums.Terrain.ENEMY_CAMP: pgc.ENEMY_CAMP_COLOR,
+        base_sprite = {
+            enums.Terrain.ALLY_CAMP: pygame.image.load("sprites/general/ally_base.png"),
+            enums.Terrain.ENEMY_CAMP: pygame.image.load("sprites/general/enemy_base.png"),
         }
         for i in range(bf_map.height):
             for j in range(bf_map.width):
@@ -48,9 +48,7 @@ class Art():
                 elif bf_map.get_terrain((i, j)) == enums.Terrain.ROAD:
                     map_img.blit(random.choice(roadsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
                 else:
-                  pygame.draw.rect(map_img, terrain_color[bf_map.get_terrain((i, j))],
-                  pygame.Rect(j*pgc.GRID_SIZE, i*pgc.GRID_SIZE,
-                  pgc.GRID_SIZE, pgc.GRID_SIZE))
+                  map_img.blit(base_sprite[bf_map.get_terrain((i, j))], (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
         return map_img
 
     def make_unit_imgs(self):
