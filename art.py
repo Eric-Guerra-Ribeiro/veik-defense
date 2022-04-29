@@ -148,6 +148,9 @@ class Art():
         """
         Draws all elements in screen.
         """
+        if self.game.changed_map:
+            self.game.changed_map = False
+            self.map_img = self.make_map_surface(self.game.get_map())
         self.screen.fill(pgc.DARK_SLATE_GRAY)
         if self.game.game_state == enums.GameState.GRACE_PERIOD:
             self.draw_playing()
