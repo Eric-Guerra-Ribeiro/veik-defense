@@ -143,6 +143,8 @@ class Art():
             self.draw_win()
         elif self.game.game_state == enums.GameState.TUTORIAL:
             self.draw_tutorial()
+        elif self.game.game_state == enums.GameState.PAUSED:
+            self.draw_playing()
         self.draw_buttons()
         pygame.display.flip()
 
@@ -167,7 +169,6 @@ class Art():
             )
     
         self.draw_ally_camp_hp_bar()
-        self.draw_buttons()
         self.draw_resource_number()
 
     def draw_wave_text(self):
@@ -232,12 +233,14 @@ def BackgroundMusic():
 
 
 
-def menu_button_content(string):
+def menu_button_content(string, fill=False):
     """
     Returns a pygame surface with a string for the size of the menu button.
     """
     regular_font = pygame.font.Font('freesansbold.ttf', 30)
     text = regular_font.render(string, True, pgc.RED)
     content = pygame.Surface((pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), pygame.SRCALPHA)
+    if fill:
+        content.fill(pgc.BLACK)
     content.blit(text, ((pgc.MENU_BUTTON_WIDTH - text.get_width())/2 ,(pgc.MENU_BUTTON_HEIGHT - text.get_height())/2))
     return content

@@ -89,3 +89,16 @@ class GameController:
 
     def ocupy_cells(self, map_cell, n):
         self.bf_map.ocupy_cells_square(*map_cell, n)
+
+    def pause(self):
+        """
+        Pause the game
+        """
+        self.past_state = self._game_state
+        self._game_state = enums.GameState.PAUSED
+
+    def unpause(self):
+        """
+        Unpause the game
+        """
+        self._game_state = self.past_state

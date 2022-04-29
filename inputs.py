@@ -7,6 +7,7 @@ import utils
 import gameconstants as gc
 import pygameconstants as pgc
 import art
+import gamecontroller
 
 class Button:
     """
@@ -99,6 +100,14 @@ class Input:
                        (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("TUTORIAL"),
                        lambda _game: utils.begin_tutorial(_game), game)
             ],
+            enums.GameState.PAUSED : [
+                Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 - 1*pgc.MENU_BUTTON_HEIGHT),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("UNPAUSE", True),
+                       lambda _game: gamecontroller.GameController.unpause(_game), game),
+                Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 0*pgc.MENU_BUTTON_HEIGHT),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("MENU", True),
+                       lambda _game: gamecontroller.GameController.reset(_game), game),
+            ],
             enums.GameState.PLAYING : [
                 Button((1100,100), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/machinegun0.png"),
                        lambda _game: utils.select_tower(_game, enums.Tower.MACHINE_GUN), game),
@@ -131,8 +140,7 @@ class Input:
                 or self.game.game_state == enums.GameState.GRACE_PERIOD):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        # TODO Pause game
-                        pass
+                        self.game.pause()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for board in self.boards[enums.GameState.PLAYING]:
                         board.press(pygame.mouse.get_pos())
@@ -146,4 +154,11 @@ class Input:
             elif self.game.game_state == enums.GameState.MENU:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for button in self.buttons[enums.GameState.MENU]:
+                        button.press(pygame.mouse.get_pos())
+            elif self.game.game_state == enums.GameState.PAUSED:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.game.unpause()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    for button in self.buttons[enums.GameState.PAUSED]:
                         button.press(pygame.mouse.get_pos())

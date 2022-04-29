@@ -27,7 +27,7 @@ def main():
     pygame.display.set_caption("Veik Defense")
     clock = pygame.time.Clock()
     game = gamecontroller.GameController()
-    screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT))
+    screen = pygame.display.set_mode((pgc.WINDOW_WIDTH, pgc.WINDOW_HEIGHT), pygame.SRCALPHA)
     bkgmusic = art.BackgroundMusic()
     input_sys = inputs.Input(game)
     arts = art.Art(screen, game, input_sys)
