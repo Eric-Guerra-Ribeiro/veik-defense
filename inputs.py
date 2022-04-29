@@ -143,7 +143,7 @@ class Input:
             if (self.game.game_state == enums.GameState.PLAYING
                 or self.game.game_state == enums.GameState.GRACE_PERIOD):
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE or pygame.K_ESCAPE:
                         self.game.pause()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for board in self.boards[enums.GameState.PLAYING]:
@@ -161,7 +161,7 @@ class Input:
                         button.press(pygame.mouse.get_pos())
             elif self.game.game_state == enums.GameState.PAUSED:
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE or pygame.K_ESCAPE:
                         self.game.unpause()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for button in self.buttons[enums.GameState.PAUSED]:

@@ -229,6 +229,8 @@ class Art():
         self.screen.blit(self.menu_background, (0, 0))
         text = self.big_font.render('VEIK DEFENSE', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
+        selected_map_text = self.regular_font.render(f'Selected map: {self.game.selected_map + 1}', True, pgc.RED)
+        self.screen.blit(selected_map_text, ((pgc.WINDOW_WIDTH - selected_map_text.get_width())/2, pgc.WINDOW_HEIGHT - selected_map_text.get_height()))
 
     def draw_win(self):
         """
