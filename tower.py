@@ -135,7 +135,7 @@ class CannonLvl2(Tower):
         self.dmg = gc.BASE_TDMG * 7
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.CANNON_LVL2
-        self.update_price = gc.BASE_PRICE * 3
+        self.update_price = gc.BASE_PRICE * 6
     
 class CannonLvl3(Tower):
     """
@@ -150,7 +150,6 @@ class CannonLvl3(Tower):
         self.dmg = gc.BASE_TDMG * 10
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.CANNON_LVL3
-        self.update_price = gc.BASE_PRICE * 3
 
 class AntiTankLvl1(Tower):
     """
