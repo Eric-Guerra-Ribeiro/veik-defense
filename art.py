@@ -48,7 +48,8 @@ class Art():
                 elif bf_map.get_terrain((i, j)) == enums.Terrain.ROAD:
                     map_img.blit(random.choice(roadsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
                 else:
-                  map_img.blit(base_sprite[bf_map.get_terrain((i, j))], (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
+                    map_img.blit(random.choice(roadsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
+                    map_img.blit(base_sprite[bf_map.get_terrain((i, j))], (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
         return map_img
 
     def make_unit_imgs(self):
