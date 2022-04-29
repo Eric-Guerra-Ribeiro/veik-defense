@@ -76,6 +76,18 @@ def update_tower(map_cell, game):
                 game.decrease_resources(price)
                 break
 
+def update_factory(map_cell, game):
+    "Updates a factory in map"
+    if not game.are_cells_empty(map_cell, 1):
+        for index, curr_factory in enumerate(game.resource_factories):
+            if curr_factory.pos == map_cell and game.resources >= curr_factory.update_price:
+                price = curr_factory.update_price
+                if curr_factory.factory_type == enums.ResourceFactory.COAL_FACTORY:
+                    game.resource_factories[index] = resourceFactory.NuclearPlant(game.bf_map, map_cell)
+                
+                game.decrease_resources(price)
+                break
+
 def select_tower(game, tower):
     """
     Selects a tower type

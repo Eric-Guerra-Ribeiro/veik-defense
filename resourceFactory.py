@@ -14,6 +14,7 @@ class ResourceFactory(abc.ABC):
         self.pos = pos
         self.production_process = 0
         self.update_price = 0
+        self.current_production = 0
 
     def produce(self):
         """
@@ -47,7 +48,6 @@ class CoalFactory(ResourceFactory):
         self.pos = pos
         self.production_rate = gc.BASE_PRODUCTION_RATE
         self.production_profit = gc.BASE_PRODUCTION_PROFIT
-        self.current_production = 0
         self.factory_type = enums.ResourceFactory.COAL_FACTORY
         self.update_price = 5 * gc.BASE_PRICE
 
