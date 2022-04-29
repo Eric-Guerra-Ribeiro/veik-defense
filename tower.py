@@ -222,29 +222,3 @@ class MissileLvl2(Tower):
         self.tower_type = enums.Tower.MISSILE_LVL2
         self.cant_shoot.append(enums.Unit.INFANTRY)
         self.cant_shoot.append(enums.Unit.ARMORED)
-
-
-class CoalFactory(Tower):
-    """
-    Coal Factory resource generation.
-    """
-
-    price = gc.BASE_PRICE
-
-    def __init__(self, bf_map, pos):
-        super().__init__(bf_map, pos)
-        self.pos = pos
-        self.tower_type = enums.Tower.COAL_FACTORY
-
-
-class NuclearPlant(Tower):
-    """
-    Nuclear Plant resource generation.
-    """
-
-    price = gc.BASE_PRICE * 5
-
-    def __init__(self, bf_map, pos):
-        super().__init__(bf_map, pos)
-        self.pos = pos
-        self.tower_type = enums.Tower.NUCLEAR_PLANT

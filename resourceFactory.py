@@ -42,12 +42,12 @@ class CoalFactory(ResourceFactory):
     """
 
     price = gc.BASE_PRICE
+    production_profit = gc.BASE_PRODUCTION_PROFIT
+    production_rate = gc.BASE_PRODUCTION_RATE
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
-        self.production_rate = gc.BASE_PRODUCTION_RATE
-        self.production_profit = gc.BASE_PRODUCTION_PROFIT
         self.factory_type = enums.ResourceFactory.COAL_FACTORY
         self.update_price = 5 * gc.BASE_PRICE
 
@@ -56,9 +56,11 @@ class NuclearPlant(ResourceFactory):
     Nuclear Plant resource generation: update of Coal Factory.
     """
 
+    production_profit = 3 * gc.BASE_PRODUCTION_PROFIT
+    production_rate = gc.BASE_PRODUCTION_RATE
+
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
         self.production_rate = gc.BASE_PRODUCTION_RATE
-        self.production_profit = 3 * gc.BASE_PRODUCTION_PROFIT
         self.factory_type = enums.ResourceFactory.NUCLEAR_PLANT
