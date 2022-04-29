@@ -1,4 +1,3 @@
-from pickle import TRUE
 import pygame
 import random
 
@@ -264,7 +263,7 @@ def BackgroundMusic():
 def create_text_box(text):
     img = pygame.Surface((3.5 * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
     regular_font = pygame.font.Font('freesansbold.ttf', 40)
-    txt = regular_font.render(text, TRUE, pgc.YELLOW)
+    txt = regular_font.render(text, True, pgc.YELLOW)
     img.blit(txt, (0,0))
     return img
 
