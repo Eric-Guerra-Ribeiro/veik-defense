@@ -1,6 +1,8 @@
 import pygame
+from art import create_surface
 
 import enums
+from tower import AntiTankLvl1, CannonLvl1, MachineGunLvl1, MissileLvl1
 import utils
 import gameconstants as gc
 import pygameconstants as pgc
@@ -84,13 +86,13 @@ class Input:
         }
         self.buttons = {
             enums.GameState.PLAYING : [
-                Button((1100,100), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/machinegun0.png"),
+                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,100), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.MACHINE_GUN_LVL1, MachineGunLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.MACHINE_GUN_LVL1), game),
-                Button((1100,200), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/cannon0.png"),
+                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,200), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.CANNON_LVL1, CannonLvl1),
                         lambda _game: utils.select_tower(_game, enums.Tower.CANNON_LVL1), game),
-                Button((1100,300), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/missile0.png"),
+                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,300), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.MISSILE_LVL1, MissileLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.MISSILE_LVL1), game),
-                Button((1100,400), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/antitank0.png"),
+                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,400), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.ANTI_TANK_LVL1, AntiTankLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.ANTI_TANK_LVL1), game)
 
             ]

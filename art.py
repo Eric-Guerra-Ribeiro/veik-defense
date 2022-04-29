@@ -53,7 +53,7 @@ class Art():
         """
         Creates surfaces with an image of each unit type.
         """
-        infantryunit = pygame.image.load("sprites/enemies/soldier0.png")
+        infantryunit = pygame.image.load("sprites/enemies/soldier3.png")
         armoredunit = pygame.image.load("sprites/enemies/tank0.png")
         airforceunit = pygame.image.load("sprites/enemies/plane0.png")
         return {enums.Unit.INFANTRY: infantryunit, enums.Unit.ARMORED: armoredunit, enums.Unit.AIR_FORCE: airforceunit}
@@ -123,7 +123,7 @@ class Art():
         Draws ally's camp resources number.
         """
         resource_number = self.game.resources
-        text = self.regular_font.render(str(resource_number), True, pgc.YELLOW)
+        text = self.regular_font.render(f"{resource_number:.0f}", True, pgc.YELLOW)
         self.screen.blit(text, pgc.ALLY_CAMP_RESOURCE_NUMBER_POS)
         self.screen.blit(pygame.image.load("sprites/general/coin.png"), pgc.ALLY_CAMP_RESOURCE_POS)
 
@@ -189,9 +189,30 @@ class Art():
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
 
         pygame.display.flip()
-
+    
 def BackgroundMusic():
     backgroundmusic = pygame.mixer.music.load("sounds/BackgroundMusic_FibradeHeroi.ogg")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
     return backgroundmusic
+
+def create_surface(type, cls):
+    """
+    Create button surface
+    """
+    img = pygame.Surface((2.75 * pgc.GRID_SIZE, pgc.GRID_SIZE))
+    regular_font = pygame.font.Font('freesansbold.ttf', 20)
+    if type == enums.Tower.MACHINE_GUN_LVL1:
+        img.blit(pygame.image.load("sprites/tower/machinegun0.png"), (0, 0))
+    elif type == enums.Tower.CANNON_LVL1:
+        img.blit(pygame.image.load("sprites/tower/cannon0.png"), (0, 0))
+    elif type == enums.Tower.MISSILE_LVL1:
+        img.blit(pygame.image.load("sprites/tower/missile0.png"), (0, 0))
+    else:
+        img.blit(pygame.image.load("sprites/tower/antitank0.png"), (0, 0))
+    text1 = regular_font.render("D:" + f"{cls.dmg:.1f}" + " F:" + f"{cls.fire_rate * 60:.1f}", True, pgc.RED)
+    text2 = regular_font.render("$" + str(cls.price), True, pgc.YELLOW)
+
+    img.blit(text1, (pgc.GRID_SIZE, 0))
+    img.blit(text2, (pgc.GRID_SIZE, pgc.GRID_SIZE / 2))
+    return img

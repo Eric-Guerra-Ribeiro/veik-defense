@@ -61,13 +61,14 @@ class MachineGunLvl1(Tower):
     """
 
     price = gc.BASE_PRICE
+    fire_rate = gc.BASE_FIRE_RATE * 10
+    dmg = gc.BASE_TDMG
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
 
-        self.fire_rate = gc.BASE_FIRE_RATE * 10
-        self.dmg = gc.BASE_TDMG
+
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MACHINE_GUN_LVL1
         self.cant_shoot.append(enums.Unit.AIR_FORCE)
@@ -111,13 +112,12 @@ class CannonLvl1(Tower):
     """
 
     price = gc.BASE_PRICE * 2
+    fire_rate = gc.BASE_FIRE_RATE * 1.5
+    dmg = gc.BASE_TDMG * 5
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
-
-        self.fire_rate = gc.BASE_FIRE_RATE * 1.5
-        self.dmg = gc.BASE_TDMG * 5
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.CANNON_LVL1
         self.update_price = gc.BASE_PRICE * 2
@@ -158,13 +158,12 @@ class AntiTankLvl1(Tower):
     """
 
     price = gc.BASE_PRICE * 10
+    fire_rate = gc.BASE_FIRE_RATE
+    dmg = gc.BASE_TDMG * 15
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
-
-        self.fire_rate = gc.BASE_FIRE_RATE
-        self.dmg = gc.BASE_TDMG * 15
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.ANTI_TANK_LVL1
         self.cant_shoot.append(enums.Unit.AIR_FORCE)
@@ -193,14 +192,14 @@ class MissileLvl1(Tower):
     """
 
     price = gc.BASE_PRICE * 8
+    fire_rate = gc.BASE_FIRE_RATE
+    dmg = gc.BASE_TDMG * 10
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
 
         self.range = 1.5*gc.BASE_RANGE
-        self.fire_rate = gc.BASE_FIRE_RATE
-        self.dmg = gc.BASE_TDMG * 10
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MISSILE_LVL1
         self.cant_shoot.append(enums.Unit.INFANTRY)
