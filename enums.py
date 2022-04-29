@@ -60,9 +60,15 @@ class GameState(enum.Enum):
     Enum class for the states of the game.
     """
     MENU = enum.auto()
+    CHOOSE_MAP = enum.auto()
     PLAYING = enum.auto()
     GRACE_PERIOD = enum.auto()
+    PAUSED = enum.auto()
     WIN = enum.auto()
+    GAME_OVER = enum.auto()
+    MAP_EDITOR = enum.auto()
+    TUTORIAL = enum.auto
+
 
 class Direction(enum.Enum):
     """

@@ -1,0 +1,30 @@
+[
+    [
+        {"n_units" : 10, "rate" : 0.5}, {"infantry_lvl1" : 1}
+    ],
+    [
+        {"n_units" : 20, "rate" : 1}, {"infantry_lvl1" : 15, "infantry_lvl2" : 5}
+    ],
+    [
+        {"n_units" : 30, "rate" : 2}, {"infantry_lvl1" : 9, "infantry_lvl2" : 9, "infantry_lvl3" : 9, "armored_lvl1" : 3}
+    ],
+    [
+        {"n_units" : 40, "rate" : 3}, {"infantry_lvl2" : 15, "infantry_lvl3" : 15, "armored_lvl1" : 5, "air_force_lvl1" : 5}
+    ],
+    [
+        {"n_units" : 60, "rate" : 4}, {"infantry_lvl2" : 15, "infantry_lvl3" : 15, "infantry_lvl4" : 10, "armored_lvl1" : 10, "air_force_lvl1" : 10}
+    ],
+    [
+        {"n_units" : 80, "rate" : 5}, {"infantry_lvl2" : 5, "infantry_lvl3" : 25, "infantry_lvl4" : 15, "armored_lvl1" : 10, "armored_lvl2" : 5, "air_force_lvl1" : 20}
+    ],
+    [
+        {"n_units" : 120, "rate" : 7}, {"infantry_lvl3" : 15, "infantry_lvl4" : 30, "armored_lvl1" : 25, "armored_lvl2" : 10, "air_force_lvl1" : 30, "air_force_lvl2" : 10}
+    ],
+    [
+        {"n_units" : 200, "rate" : 8}, {"infantry_lvl4" : 60, "armored_lvl1" : 30, "armored_lvl2" : 20, "air_force_lvl1" : 50, "air_force_lvl2" : 40}
+    ],
+    [
+        {"n_units" : Infinity, "rate" : 8}, {"infantry_lvl4" : 2, "armored_lvl2" : 1, "air_force_lvl2" : 1}
+    ]
+    
+]
