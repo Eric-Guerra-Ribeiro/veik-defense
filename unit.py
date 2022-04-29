@@ -87,6 +87,12 @@ class Unit(abc.ABC):
         """
         return self.unit_type
     
+    def get_unit_subtype(self):
+        """
+        Returns the unit subtype.
+        """
+        return self.unit_subtype
+    
     def get_direction(self):
         """
         Returns the direction that the unit is heading towards.
@@ -104,45 +110,142 @@ class Unit(abc.ABC):
 
 class Infantry(Unit):
     """
-    Basic infantry unit
+    Abstract infantry unit
+    """
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.armor = gc.BASE_ARMOR
+        self.max_health = gc.BASE_HEALTH
+        self.unit_type = enums.Unit.INFANTRY
+        self.speed = gc.BASE_SPEED
+
+class InfLvl1(Infantry):
+    """
+    Infantry unit Lvl 1
     """
     resource_reward = gc.BASE_RESOURCE_REWARD
     def __init__(self, bf_map):
         super().__init__(bf_map)
-        self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
-        self.speed = gc.BASE_SPEED
         self.armor = gc.BASE_ARMOR
-        self.unit_type = enums.Unit.INFANTRY
+        self.unit_subtype = enums.UnitSubtype.INFANTRY_LVL1
         self.dmg = gc.BASE_DMG
+
+class InfLvl2(Infantry):
+    """
+    Infantry unit Lvl 2
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 1
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.health = self.max_health
+        self.armor = gc.BASE_ARMOR * 2
+        self.unit_subtype = enums.UnitSubtype.INFANTRY_LVL2
+        self.dmg = gc.BASE_DMG * 1.2
+
+class InfLvl3(Infantry):
+    """
+    Infantry unit Lvl 3
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.health = self.max_health
+        self.armor = gc.BASE_ARMOR * 2.5
+        self.unit_subtype = enums.UnitSubtype.INFANTRY_LVL3
+        self.dmg = gc.BASE_DMG * 1.5
+
+class InfLvl4(Infantry):
+    """
+    Infantry unit Lvl 4
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.health = self.max_health
+        self.armor = gc.BASE_ARMOR * 3.0
+        self.unit_subtype = enums.UnitSubtype.INFANTRY_LVL4
+        self.dmg = gc.BASE_DMG * 1.8
 
 class AirForce(Unit):
     """
-    Basic air force unit
+    Abstract air force unit
     """
-    resource_reward = gc.BASE_RESOURCE_REWARD * 2
     def __init__(self, bf_map):
         super().__init__(bf_map)
         self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
         self.speed = gc.BASE_SPEED * 2
-        self.armor = gc.BASE_ARMOR * 2
         self.unit_type = enums.Unit.AIR_FORCE
-        self.dmg = gc.BASE_DMG
         self.pierc_dict = {enums.Tower.MISSILE_LVL1 : 3}
+
+class AirForceLvl1(AirForce):
+    """
+    Air Force unit Lvl 1
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.health = self.max_health
+        self.armor = gc.BASE_ARMOR * 2
+        self.unit_subtype = enums.UnitSubtype.AIR_FORCE_LVL1
+        self.dmg = gc.BASE_DMG
+        self.pierc_dict = {enums.Tower.MISSILE_LVL1 : 3,
+                           enums.Tower.MISSILE_LVL2 : 3}
+    
+class AirForceLvl2(AirForce):
+    """
+    Air Force unit Lvl 2
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2.5
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.health = self.max_health
+        self.armor = gc.BASE_ARMOR * 4
+        self.unit_subtype = enums.UnitSubtype.AIR_FORCE_LVL2
+        self.dmg = gc.BASE_DMG * 1.5
+        self.pierc_dict = {enums.Tower.MISSILE_LVL1 : 2,
+                           enums.Tower.MISSILE_LVL2 : 2.5}
 
 class Armory(Unit):
     """
-    Basic armored unit
+    Abstract armory unit
     """
-    resource_reward = gc.BASE_RESOURCE_REWARD * 2
     def __init__(self, bf_map):
         super().__init__(bf_map)
         self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
         self.speed = gc.BASE_SPEED / 2
-        self.armor = gc.BASE_ARMOR * 4
         self.unit_type = enums.Unit.ARMORED
-        self.dmg = gc.BASE_DMG
+
+class ArmoryLvl1(Armory):
+    """
+    Armory unit Lvl 1
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 2.5
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.armor = gc.BASE_ARMOR * 4
+        self.unit_subtype = enums.UnitSubtype.ARMORED_LVL1
+        self.dmg = gc.BASE_DMG * 2
         self.pierc_dict = {enums.Tower.ANTI_TANK_LVL1 : 2,
-                            enums.Tower.MACHINE_GUN_LVL1 : 0.3}
+                           enums.Tower.ANTI_TANK_LVL2 : 2,
+                           enums.Tower.MACHINE_GUN_LVL1 : 0.3,
+                           enums.Tower.MACHINE_GUN_LVL2 : 0.3,
+                           enums.Tower.MACHINE_GUN_LVL3 : 0.3}
+
+class ArmoryLvl2(Armory):
+    """
+    Armory unit Lvl 2
+    """
+    resource_reward = gc.BASE_RESOURCE_REWARD * 4
+    def __init__(self, bf_map):
+        super().__init__(bf_map)
+        self.armor = gc.BASE_ARMOR * 6
+        self.unit_subtype = enums.UnitSubtype.ARMORED_LVL2
+        self.dmg = gc.BASE_DMG * 2.5
+        self.pierc_dict = {enums.Tower.ANTI_TANK_LVL1 : 2,
+                           enums.Tower.ANTI_TANK_LVL2 : 2,
+                           enums.Tower.MACHINE_GUN_LVL1 : 0.2,
+                           enums.Tower.MACHINE_GUN_LVL2 : 0.2,
+                           enums.Tower.MACHINE_GUN_LVL3 : 0.2}

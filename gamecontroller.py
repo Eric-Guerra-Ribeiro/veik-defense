@@ -47,16 +47,26 @@ class GameController:
     def decrease_resources(self, nmb):
         self.resources -= nmb
 
-    def spawn_unit(self, type):
+    def spawn_unit(self, subtype):
         """
-        Spawns a unit of type
+        Spawns a unit of a given subtype
         """
-        if type == enums.Unit.INFANTRY:
-            self.units.append(unit.Infantry(self.bf_map))
-        elif type == enums.Unit.ARMORED:
-            self.units.append(unit.Armory(self.bf_map))
-        elif type == enums.Unit.AIR_FORCE:
-            self.units.append(unit.AirForce(self.bf_map))
+        if subtype == enums.UnitSubtype.INFANTRY_LVL1:
+            self.units.append(unit.InfLvl1(self.bf_map))
+        elif subtype == enums.UnitSubtype.INFANTRY_LVL2:
+            self.units.append(unit.InfLvl2(self.bf_map))
+        elif subtype == enums.UnitSubtype.INFANTRY_LVL3:
+            self.units.append(unit.InfLvl3(self.bf_map))
+        elif subtype == enums.UnitSubtype.INFANTRY_LVL4:
+            self.units.append(unit.InfLvl4(self.bf_map))
+        elif subtype == enums.UnitSubtype.ARMORED_LVL1:
+            self.units.append(unit.ArmoryLvl1(self.bf_map))
+        elif subtype == enums.UnitSubtype.ARMORED_LVL2:
+            self.units.append(unit.ArmoryLvl2(self.bf_map))
+        elif subtype == enums.UnitSubtype.AIR_FORCE_LVL1:
+            self.units.append(unit.AirForceLvl1(self.bf_map))
+        elif subtype == enums.UnitSubtype.AIR_FORCE_LVL2:
+            self.units.append(unit.AirForceLvl2(self.bf_map))
 
     def get_map(self):
         """

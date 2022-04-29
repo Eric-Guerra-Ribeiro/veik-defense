@@ -19,6 +19,19 @@ class Unit(enum.Enum):
     ARMORED = enum.auto()
     AIR_FORCE = enum.auto()
 
+class UnitSubtype(enum.Enum):
+    """
+    Enum class for the subtypes of military units.
+    """
+    INFANTRY_LVL1 = enum.auto()
+    INFANTRY_LVL2 = enum.auto()
+    INFANTRY_LVL3 = enum.auto()
+    INFANTRY_LVL4 = enum.auto()
+    ARMORED_LVL1 = enum.auto()
+    ARMORED_LVL2 = enum.auto()
+    AIR_FORCE_LVL1 = enum.auto()
+    AIR_FORCE_LVL2 = enum.auto()
+
 
 class Tower(enum.Enum):
     """

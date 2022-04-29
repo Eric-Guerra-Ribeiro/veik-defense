@@ -53,7 +53,7 @@ class Art():
         """
         Creates surfaces with an image of each unit type.
         """
-        infantryunit = pygame.image.load("sprites/enemies/soldier3.png")
+        infantryunit = pygame.image.load("sprites/enemies/soldier0.png")
         armoredunit = pygame.image.load("sprites/enemies/tank0.png")
         airforceunit = pygame.image.load("sprites/enemies/plane0.png")
         return {enums.Unit.INFANTRY: infantryunit, enums.Unit.ARMORED: armoredunit, enums.Unit.AIR_FORCE: airforceunit}
