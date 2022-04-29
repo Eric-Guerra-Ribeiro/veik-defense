@@ -128,3 +128,4 @@ class GameController:
         self.selected_map += 1
         if self.selected_map >= self.n_maps:
             self.selected_map = 0
+        self.reset()
