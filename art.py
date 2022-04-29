@@ -250,9 +250,9 @@ class Art():
         """
         text = self.big_font.render('TUTORIAL', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
-        text = self.big_font.render('SE VIRA BIXO!', True, pgc.BLUE)
+        text = self.big_font.render('Read README.md', True, pgc.YELLOW)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
-        text = self.regular_font.render("Press any key to restart", True, pgc.BLUE)
+        text = self.regular_font.render("Press any key to return to menu", True, pgc.YELLOW)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2 + 2*text.get_height()))
 
 
