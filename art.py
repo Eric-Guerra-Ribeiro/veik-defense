@@ -4,7 +4,6 @@ import random
 import pygameconstants as pgc
 import gameconstants as gc
 import enums
-import screenpos
 import utils
 
 class Art():
@@ -178,20 +177,20 @@ class Art():
         self.screen.blit(self.map_img, pgc.MAP_CORNER_POS)
 
         for unit in self.game.units:
-            unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
+            unit_pos = utils.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.screen.blit(
                 pygame.transform.rotate(self.unit_imgs[unit.get_unit_subtype()], utils.direction2angle(unit.get_direction())), unit_pos
             )
         for unit in self.game.units:
-            unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
+            unit_pos = utils.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.hp_bar(unit_pos, unit.get_health_perc())
         for tower in self.game.towers:
-            tower_pos = screenpos.unit_pos_in_scrn(tower.pos, tower.pos, 1)
+            tower_pos = utils.tower_pos_in_scrn(tower.pos)
             self.screen.blit(
                 self.tower_imgs[tower.get_tower_type()], tower_pos
             )
         for factory in self.game.resource_factories:
-            factory_pos = screenpos.unit_pos_in_scrn(factory.pos, factory.pos, 1)
+            factory_pos = utils.tower_pos_in_scrn(factory.pos)
             self.screen.blit(
                 self.factory_imgs[factory.get_factory_type()], factory_pos
             )

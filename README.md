@@ -88,7 +88,6 @@ Another important idea is using inheritance and abstract classes. Abstract class
  - ```main.py```: Main file. Has the game loop and initializes the objects of the main classes, such as the Game Controller, Input System and Art Manager.
  - ```pygameconstants.py```: Constants for positions in the screen, sizes of the screen, buttons and grid cell, colors and other constants related to displaying the game on the screen.
  - ```resourceFactory.py```: Abstract class for a resource factory and its children.
- - ```screenpos.py```: Functions that help find the position of some object on the screen.
  - ```tower.py```: Abstract class for a defensive tower and its children.
  - ```unit.py```: Abstract class for an enemy unit and its children.
  - ```utils.py```: Miscelleanous functions that help with the implementation.

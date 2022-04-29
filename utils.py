@@ -2,6 +2,7 @@ import enums
 import tower
 import resourceFactory
 import waves
+import pygameconstants as pgc
 
 def valid_index(index, list_dim):
     """
@@ -173,3 +174,24 @@ def begin_tutorial(game):
     Shows the game's tutorial
     """
     game.game_state = enums.GameState.TUTORIAL
+
+
+def unit_pos_in_scrn(cur_pos, next_pos, move_prog):
+    """
+    Calculates the unit position in the screen.
+    """
+    return (
+        pgc.MAP_CORNER_POS[0]  + (pgc.GRID_SIZE*(move_prog*next_pos[1] + (1-move_prog)*cur_pos[1])),
+        pgc.MAP_CORNER_POS[1]  + (pgc.GRID_SIZE*(move_prog*next_pos[0] + (1-move_prog)*cur_pos[0]))
+    )
+
+
+def tower_pos_in_scrn(pos):
+    """
+    Calculates the tower/factory position in the screen.
+    """
+    return (
+        pgc.MAP_CORNER_POS[0]  + pgc.GRID_SIZE*pos[1],
+        pgc.MAP_CORNER_POS[1]  + pgc.GRID_SIZE*pos[0]
+    )
+

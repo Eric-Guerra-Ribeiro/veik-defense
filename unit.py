@@ -2,7 +2,6 @@ import abc
 
 import enums
 import gameconstants as gc
-import screenpos
 
 class Unit(abc.ABC):
     """
@@ -97,7 +96,7 @@ class Unit(abc.ABC):
         """
         Returns the direction that the unit is heading towards.
         """
-        vec_direction = (screenpos.Coords(*self.next_pos) - screenpos.Coords(*self.cur_pos)).get()
+        vec_direction = (self.next_pos[0] - self.cur_pos[0], self.next_pos[1] - self.cur_pos[1])
         if vec_direction == (0, 0) or vec_direction == (0,1):
             return enums.Direction.RIGHT
         elif vec_direction == (-1, 0):
