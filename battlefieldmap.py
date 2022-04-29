@@ -98,3 +98,11 @@ class BattleFieldMap:
         for x in range(row, row + n):
             for y in range(column, column + n):
                 self.is_cell_empty[x][y] = False
+    
+    def desocupy_cells_square(self, row, column, n):
+        """
+        Makes so the cells in the square of size n are empty.
+        """
+        for x in range(row, row + n):
+            for y in range(column, column + n):
+                self.is_cell_empty[x][y] = True

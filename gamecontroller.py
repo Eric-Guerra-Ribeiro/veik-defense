@@ -22,6 +22,8 @@ class GameController:
         self.towers = []
         self.resource_factories = []
         self.selected_tower = None
+        self.updating = False
+        self.deleting = False
         self.resources = BASE_RESOURCE
         self._game_state = enums.GameState.MENU
         self.waves = None
@@ -102,6 +104,9 @@ class GameController:
 
     def ocupy_cells(self, map_cell, n):
         self.bf_map.ocupy_cells_square(*map_cell, n)
+
+    def desocupy_cells(self, map_cell, n):
+        self.bf_map.desocupy_cells_square(*map_cell, n)
 
     def pause(self):
         """
