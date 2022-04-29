@@ -265,6 +265,9 @@ def create_surface(type, cls):
     regular_font = pygame.font.Font('freesansbold.ttf', 20)
     if type == enums.ResourceFactory.COAL_FACTORY:
         img.blit(pygame.image.load("sprites/general/factory.png"), (0, 0))
+
+        text1 = regular_font.render("P:" + f"{int(cls.production_profit)}" + " R:" + f"{cls.production_rate * pgc.FREQUENCY:.1f}", True, pgc.GREEN)
+        text2 = regular_font.render("$" + str(cls.price), True, pgc.YELLOW)
     else :
         if type == enums.Tower.MACHINE_GUN_LVL1:
             img.blit(pygame.image.load("sprites/tower/machinegun0.png"), (0, 0))
@@ -274,11 +277,11 @@ def create_surface(type, cls):
             img.blit(pygame.image.load("sprites/tower/missile0.png"), (0, 0))
         elif type == enums.Tower.ANTI_TANK_LVL1:
             img.blit(pygame.image.load("sprites/tower/antitank0.png"), (0, 0))
-        text1 = regular_font.render("D:" + f"{cls.dmg:.1f}" + " F:" + f"{cls.fire_rate * 60:.1f}", True, pgc.RED)
+        text1 = regular_font.render("D:" + f"{cls.dmg:.1f}" + " F:" + f"{cls.fire_rate * pgc.FREQUENCY:.1f}", True, pgc.RED)
         text2 = regular_font.render("$" + str(cls.price), True, pgc.YELLOW)
 
-        img.blit(text1, (pgc.GRID_SIZE, 0))
-        img.blit(text2, (pgc.GRID_SIZE, pgc.GRID_SIZE / 2))
+    img.blit(text1, (pgc.GRID_SIZE, 0))
+    img.blit(text2, (pgc.GRID_SIZE, pgc.GRID_SIZE / 2))
     return img
 
 

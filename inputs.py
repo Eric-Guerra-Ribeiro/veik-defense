@@ -4,7 +4,8 @@ import pygame
 from art import create_surface
 
 import enums
-from tower import AntiTankLvl1, CannonLvl1, CoalFactory, MachineGunLvl1, MissileLvl1
+from tower import AntiTankLvl1, CannonLvl1, MachineGunLvl1, MissileLvl1
+from resourceFactory import CoalFactory
 import utils
 import gameconstants as gc
 import pygameconstants as pgc
