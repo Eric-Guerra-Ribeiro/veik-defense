@@ -61,7 +61,9 @@ Run the main file after all packages were successfully installed.
   ```
 
 ## Instructions
-To play the game, choose the map and either the mode Campaign (8 waves of increasing difficulty) or Endless (infinite waves).
+The game is fairly intuitive and can be played only using the mouse.
+
+To play the game, choose the map and either the mode Campaign (8 waves of increasing difficulty) or Endless (infinite waves) by clicking the desired option with the mouse.
 
 Each defense tower has a different damage (D) and fire rate (F). Resource towers have profit gains (P) and production rate (R).
 
@@ -70,6 +72,8 @@ To deploy a tower, click on the type at the right side and click at where you wo
 To update a tower, click at "UPDATE" at the bottom side and click at the tower you would like to update. The costs for updates of defense towers are the same cost of the tower deployment for the first upgrade and three times that cost for the second upgrade. For the resource tower, the update cost is five times the cost of deployment.
 
 To destroy a tower, click at "DESTROY" at the bottom side and click at the tower you would like to destroy. The square for the tower will be freed and you will get half of the total cost invested at the tower back.
+
+While playing the game, you can pause it using either Escape or Space bar. To unpause, press either of the keys once more or click on the button that will be shown on screen.
 
 ## Architecture
 The main idea behind the code is creating "main" classes that handle each of the major subsystems of the game (game logic, input system, graphics/screen).
