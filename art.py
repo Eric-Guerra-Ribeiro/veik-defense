@@ -18,6 +18,7 @@ class Art():
         self.map_img = self.make_map_surface(game.get_map())
         self.unit_imgs = self.make_unit_imgs()
         self.tower_imgs = self.make_tower_imgs()
+        self.factory_imgs = self.make_factory_images()
         self.regular_font = pygame.font.Font('freesansbold.ttf', 30)
         self.big_font = pygame.font.Font('freesansbold.ttf', 50)
         self.tower_sounds = self.make_tower_sounds()
@@ -80,14 +81,17 @@ class Art():
         antitanklvl2_sur = pygame.image.load("sprites/tower/antitank1.png")
         missilelvl1_sur = pygame.image.load("sprites/tower/missile0.png")
         missilelvl2_sur = pygame.image.load("sprites/tower/missile1.png")
-        nuclearpp_sur = pygame.image.load("sprites/general/nuclearplant.png")
-        coalfactory_sur = pygame.image.load("sprites/general/factory.png")
         return {enums.Tower.MACHINE_GUN_LVL1: mgunlvl1_sur, enums.Tower.MACHINE_GUN_LVL2: mgunlvl2_sur,
                 enums.Tower.MACHINE_GUN_LVL3: mgunlvl3_sur, enums.Tower.CANNON_LVL1: cannonlvl1_sur,
                 enums.Tower.CANNON_LVL2: cannonlvl2_sur, enums.Tower.CANNON_LVL3: cannonlvl3_sur,
                 enums.Tower.ANTI_TANK_LVL1: antitanklvl1_sur, enums.Tower.ANTI_TANK_LVL2: antitanklvl2_sur, 
-                enums.Tower.MISSILE_LVL1: missilelvl1_sur, enums.Tower.MISSILE_LVL2: missilelvl2_sur,
-                enums.Tower.NUCLEAR_PLANT: nuclearpp_sur, enums.Tower.COAL_FACTORY: coalfactory_sur}
+                enums.Tower.MISSILE_LVL1: missilelvl1_sur, enums.Tower.MISSILE_LVL2: missilelvl2_sur}
+    
+    def make_factory_images(self):
+        nuclearpp_sur = pygame.image.load("sprites/general/nuclearplant.png")
+        coalfactory_sur = pygame.image.load("sprites/general/factory.png")
+        return {enums.ResourceFactory.NUCLEAR_PLANT: nuclearpp_sur, enums.ResourceFactory.COAL_FACTORY: coalfactory_sur}
+
     
     def make_tower_sounds(self):
         """
@@ -171,6 +175,12 @@ class Art():
             self.screen.blit(
                 self.tower_imgs[tower.get_tower_type()], tower_pos
             )
+        for factory in self.game.resource_factories:
+            factory_pos = screenpos.unit_pos_in_scrn(factory.pos, factory.pos, 1)
+            self.screen.blit(
+                self.factory_imgs[factory.get_factory_type()], factory_pos
+            )
+
     
         self.draw_ally_camp_hp_bar()
         self.draw_buttons()

@@ -47,6 +47,11 @@ class Tower(enum.Enum):
     ANTI_TANK_LVL2 = enum.auto()
     MISSILE_LVL1 = enum.auto()
     MISSILE_LVL2 = enum.auto()
+
+class ResourceFactory(enum.Enum):
+    """
+    Enum class for the types of factories.
+    """
     COAL_FACTORY = enum.auto()
     NUCLEAR_PLANT = enum.auto()
 

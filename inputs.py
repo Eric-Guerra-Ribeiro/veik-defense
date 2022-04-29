@@ -91,8 +91,9 @@ class Input:
                 Button((1100,300), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/missile0.png"),
                        lambda _game: utils.select_tower(_game, enums.Tower.MISSILE_LVL1), game),
                 Button((1100,400), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/tower/antitank0.png"),
-                       lambda _game: utils.select_tower(_game, enums.Tower.ANTI_TANK_LVL1), game)
-
+                       lambda _game: utils.select_tower(_game, enums.Tower.ANTI_TANK_LVL1), game),
+                Button((1100,500), (pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.image.load("sprites/general/factory.png"),
+                       lambda _game: utils.select_tower(_game, enums.ResourceFactory.COAL_FACTORY), game)
             ]
         }
 

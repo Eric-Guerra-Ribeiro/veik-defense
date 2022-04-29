@@ -1,5 +1,6 @@
 import enums
 import tower
+import resourceFactory
 
 def valid_index(index, list_dim):
     """
@@ -48,6 +49,10 @@ def add_tower(map_cell, game):
             game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.MissileLvl1(game.bf_map, map_cell))
             game.decrease_resources(tower.MissileLvl1.price)
+        elif game.selected_tower == enums.ResourceFactory.COAL_FACTORY and game.resources >= resourceFactory.CoalFactory.price:
+            game.ocupy_cells(map_cell, 1)
+            game.resource_factories.append(resourceFactory.CoalFactory(game.bf_map, map_cell))
+            game.decrease_resources(resourceFactory.CoalFactory.price)
 
 def update_tower(map_cell, game):
     "Updates a tower in map"
