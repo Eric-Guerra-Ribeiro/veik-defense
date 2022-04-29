@@ -56,7 +56,11 @@ def add_tower(map_cell, game):
             game.decrease_resources(resourceFactory.CoalFactory.price)
 
 def update_tower(map_cell, game):
-    "Updates a tower in map"
+    """
+    Updates a tower in map
+    """
+    if not game.updating:
+        return
     if not game.are_cells_empty(map_cell, 1):
         for index, curr_tower in enumerate(game.towers):
             if curr_tower.pos == map_cell and game.resources >= curr_tower.update_price:
@@ -75,10 +79,14 @@ def update_tower(map_cell, game):
                     game.towers[index] = tower.MissileLvl2(game.bf_map, map_cell)
 
                 game.decrease_resources(price)
-                break
+                return
 
 def update_factory(map_cell, game):
-    "Updates a factory in map"
+    """
+    Updates a factory in map
+    """
+    if not game.updating:
+        return
     if not game.are_cells_empty(map_cell, 1):
         for index, curr_factory in enumerate(game.resource_factories):
             if curr_factory.pos == map_cell and game.resources >= curr_factory.update_price:
@@ -87,7 +95,28 @@ def update_factory(map_cell, game):
                     game.resource_factories[index] = resourceFactory.NuclearPlant(game.bf_map, map_cell)
                 
                 game.decrease_resources(price)
-                break
+                return
+
+def delete_tower(map_cell, game):
+    """
+    Destroys a tower or factory in map
+    """
+    if not game.deleting:
+        return
+    if not game.are_cells_empty(map_cell, 1):
+        for index, curr_tower in enumerate(game.towers):
+            if curr_tower.pos == map_cell:
+                game.towers.pop(index)
+                game.desocupy_cells(map_cell, 1)
+                game.increase_resources(curr_tower.price / 2)
+                return
+        for index, curr_factory in enumerate(game.resource_factories):
+            if curr_factory.pos == map_cell:
+                game.resource_factories.pop(index)
+                game.desocupy_cells(map_cell, 1)
+                game.increase_resources(curr_factory.price / 2)
+                return
+
 
 def select_tower(game, tower):
     """
@@ -97,6 +126,30 @@ def select_tower(game, tower):
         game.selected_tower = None
     else:
         game.selected_tower = tower
+        game.updating = False
+        game.deleting = False
+
+def select_update(game):
+    """
+    Changes updating state
+    """
+    if game.updating:
+        game.updating = False
+    else:
+        game.updating = True
+        game.deleting = False
+        game.selected_tower = None
+
+def select_deleting(game):
+    """
+    Changes deleting state
+    """
+    if game.deleting:
+        game.deleting = False
+    else:
+        game.deleting = True
+        game.updating = False
+        game.selected_tower = None
 
 
 def begin_campaign(game):

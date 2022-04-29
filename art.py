@@ -48,7 +48,8 @@ class Art():
                 elif bf_map.get_terrain((i, j)) == enums.Terrain.ROAD:
                     map_img.blit(random.choice(roadsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
                 else:
-                  map_img.blit(base_sprite[bf_map.get_terrain((i, j))], (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
+                    map_img.blit(random.choice(roadsprites), (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
+                    map_img.blit(base_sprite[bf_map.get_terrain((i, j))], (j*pgc.GRID_SIZE, i*pgc.GRID_SIZE))
         return map_img
 
     def make_unit_imgs(self):
@@ -259,6 +260,12 @@ def BackgroundMusic():
     pygame.mixer.music.play(-1)
     return backgroundmusic
 
+def create_text_box(text):
+    img = pygame.Surface((3.5 * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
+    regular_font = pygame.font.Font('freesansbold.ttf', 40)
+    txt = regular_font.render(text, True, pgc.YELLOW)
+    img.blit(txt, (0,0))
+    return img
 
 def create_surface(type, cls):
     """

@@ -1,7 +1,7 @@
 import collections
 
 import pygame
-from art import create_surface
+from art import create_surface, create_text_box
 
 import enums
 from tower import AntiTankLvl1, CannonLvl1, MachineGunLvl1, MissileLvl1
@@ -84,6 +84,7 @@ class Input:
         self.game = game
         self.boards = {
             enums.GameState.PLAYING : [
+                Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.delete_tower, self.game),
                 Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.update_tower, self.game),
                 Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.update_factory, self.game),
                 Board(pgc.MAP_CORNER_POS, (gc.MAP_WIDTH, gc.MAP_HEIGHT), pgc.GRID_SIZE, utils.add_tower, self.game)
@@ -116,7 +117,11 @@ class Input:
                 Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, 4*pgc.MAP_CORNER_POS[1] + 3*pgc.GRID_SIZE), create_surface(enums.Tower.ANTI_TANK_LVL1, AntiTankLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.ANTI_TANK_LVL1), game),
                 Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, 5*pgc.MAP_CORNER_POS[1] + 4*pgc.GRID_SIZE), create_surface(enums.ResourceFactory.COAL_FACTORY, CoalFactory),
-                       lambda _game: utils.select_tower(_game, enums.ResourceFactory.COAL_FACTORY), game)
+                       lambda _game: utils.select_tower(_game, enums.ResourceFactory.COAL_FACTORY), game),
+                Button((pgc.MAP_CORNER_POS[0] + 2.5 * pgc.GRID_SIZE, pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE*gc.MAP_HEIGHT + 20), create_text_box('UPDATE'),
+                       lambda _game: utils.select_update(_game), game),
+                Button((pgc.MAP_CORNER_POS[0] +  10 * pgc.GRID_SIZE,pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE*gc.MAP_HEIGHT + 20), create_text_box('DESTROY'),
+                       lambda _game: utils.select_deleting(_game), game)
             ]
         }
 
