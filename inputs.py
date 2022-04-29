@@ -99,8 +99,8 @@ class Input:
                        (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CHALLENGE"),
                        lambda _game: utils.begin_challenge(_game), game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 0*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("MAP EDITOR"),
-                       lambda _game: None, game),
+                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CHANGE MAP"),
+                       lambda _game: gamecontroller.GameController.next_map(_game), game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 1*pgc.MENU_BUTTON_HEIGHT),
                        (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("TUTORIAL"),
                        lambda _game: utils.begin_tutorial(_game), game)

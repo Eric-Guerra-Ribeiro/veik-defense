@@ -1,3 +1,5 @@
+import pathlib
+
 import battlefieldmap
 from gameconstants import BASE_RESOURCE
 import unit
@@ -12,12 +14,14 @@ class GameController:
     """
 
     def __init__(self):
+        self.selected_map = 0
+        self.n_maps = sum(1 for _ in pathlib.Path("maps/").glob("*"))
         self.reset()
         
     
     def reset(self):
         self.running = True
-        self.bf_map = battlefieldmap.BattleFieldMap()
+        self.bf_map = battlefieldmap.BattleFieldMap(f"maps/map{self.selected_map}.json")
         self.units = []
         self.towers = []
         self.resource_factories = []
@@ -25,6 +29,7 @@ class GameController:
         self.resources = BASE_RESOURCE
         self._game_state = enums.GameState.MENU
         self.waves = None
+        self.changed_map = True
 
     def run(self):
         if (self._game_state == enums.GameState.PLAYING
@@ -115,3 +120,12 @@ class GameController:
         Unpause the game
         """
         self._game_state = self.past_state
+
+    def next_map(self):
+        """
+        Selects next map
+        """
+        self.selected_map += 1
+        if self.selected_map >= self.n_maps:
+            self.selected_map = 0
+        self.reset()
