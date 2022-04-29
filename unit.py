@@ -215,7 +215,7 @@ class Armory(Unit):
         super().__init__(bf_map)
         self.max_health = gc.BASE_HEALTH
         self.health = self.max_health
-        self.speed = gc.BASE_SPEED / 2
+        self.speed = gc.BASE_SPEED * 0.7
         self.unit_type = enums.Unit.ARMORED
 
 class ArmoryLvl1(Armory):
