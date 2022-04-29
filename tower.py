@@ -79,6 +79,8 @@ class MachineGunLvl2(Tower):
     Machine gun defense tower Level 2.
     """
 
+    price = 2*gc.BASE_PRICE
+
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
@@ -94,6 +96,8 @@ class MachineGunLvl3(Tower):
     """
     Machine gun defense tower Level 3.
     """
+
+    price = 5*gc.BASE_PRICE
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
@@ -127,6 +131,8 @@ class CannonLvl2(Tower):
     Rocket Launcher defense tower Level 2.
     """
 
+    price = 4*gc.BASE_PRICE
+
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
         self.pos = pos
@@ -141,6 +147,8 @@ class CannonLvl3(Tower):
     """
     Rocket Launcher defense tower Level 2.
     """
+
+    price = 10*gc.BASE_PRICE
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
@@ -172,6 +180,8 @@ class AntiTankLvl2(Tower):
     """
     Armored defense tower.
     """
+
+    price = 20*gc.BASE_PRICE
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)
@@ -209,6 +219,8 @@ class MissileLvl2(Tower):
     """
     Air force defense tower.
     """
+
+    price = 16*gc.BASE_PRICE
 
     def __init__(self, bf_map, pos):
         super().__init__(bf_map, pos)

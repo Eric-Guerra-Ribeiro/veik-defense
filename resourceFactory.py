@@ -56,6 +56,7 @@ class NuclearPlant(ResourceFactory):
     Nuclear Plant resource generation: update of Coal Factory.
     """
 
+    price = 6 * gc.BASE_PRICE
     production_profit = 3 * gc.BASE_PRODUCTION_PROFIT
     production_rate = gc.BASE_PRODUCTION_RATE
 
