@@ -147,7 +147,7 @@ class Art():
         """
         Draws all elements in screen.
         """
-        self.screen.fill(pgc.BLACK)
+        self.screen.fill(pgc.DARK_SLATE_GRAY)
         if self.game.game_state == enums.GameState.GRACE_PERIOD:
             self.draw_playing()
             self.draw_wave_text()
@@ -218,7 +218,7 @@ def create_surface(type, cls):
     """
     Create button surface
     """
-    img = pygame.Surface((2.75 * pgc.GRID_SIZE, pgc.GRID_SIZE))
+    img = pygame.Surface((2.75 * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
     regular_font = pygame.font.Font('freesansbold.ttf', 20)
     if type == enums.ResourceFactory.COAL_FACTORY:
         img.blit(pygame.image.load("sprites/general/factory.png"), (0, 0))
