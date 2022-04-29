@@ -6,6 +6,7 @@ Tower defense game based in a military invasion. This project was an assignment 
 - [**Assets**](#assets)
 - [**Running The Game**](#running-the-game)
 - [**Instructions**](#instructions)
+- [**Documentation**](#documentation)
 
 
 ## Setup
@@ -67,3 +68,11 @@ To deploy a tower, click on the type at the right side and click at where you wo
 To update a tower, click at "UPDATE" at the bottom side and click at the tower you would like to update. The costs for updates of defense towers are the same cost of the tower deployment for the first upgrade and three times that cost for the second upgrade. For the resource toer, the update cost is five times the cost of deployment.
 
 To destroy a tower, click at "DESTROY" at the bottom side and click at the tower you would like to destroy. The square for the tower will be released and you will get half of the total cost invested at the tower back.
+
+## Documentation
+
+There are two config files, [gameconstants](gameconstants.py) and [pygameconstants](pygameconstants.py) there are used for game specifc and general parameters, respectively.
+
+The [main](main.py) file is responsible for starting the game, while the [utils](utils.py) file has auxiliary finctions used in different parts of the game.
+
+All other python files are classes with their use and methods described via docstrings documentation.
