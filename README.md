@@ -38,7 +38,9 @@ Tower defense game based in a military invasion. This project was an assignment 
 The team would like to thank every artist that made their art public for use at this game.
 ### Backgrounds
 Game Over Background: https://www.publicdomainpictures.net/en/view-image.php?image=175816&picture=verdun-war-cemetery
+
 Main Menu: https://www.insideover.com/war/images-from-a-war-zone-military-photographers-and-the-vietnam-war.html
+
 Win Background: https://qz.com/411672/the-allies-embargoed-germanys-surrender-in-world-war-ii-until-an-ap-reporter-defied-them/
 ### Sound
 Fibra de Herói Song: https://www.youtube.com/watch?v=PIpYx4wfqcg

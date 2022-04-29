@@ -227,7 +227,7 @@ class MissileLvl2(Tower):
         self.pos = pos
 
         self.range = 2.0 * gc.BASE_RANGE
-        self.fire_rate = 1.4 * gc.BASE_FIRE_RATE
+        self.fire_rate = 1.8 * gc.BASE_FIRE_RATE
         self.dmg = gc.BASE_TDMG * 15
         self.size = gc.BASE_SIZE
         self.tower_type = enums.Tower.MISSILE_LVL2
