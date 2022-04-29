@@ -54,10 +54,18 @@ class Art():
         """
         Creates surfaces with an image of each unit type.
         """
-        infantryunit = pygame.image.load("sprites/enemies/soldier0.png")
-        armoredunit = pygame.image.load("sprites/enemies/tank0.png")
-        airforceunit = pygame.image.load("sprites/enemies/plane0.png")
-        return {enums.Unit.INFANTRY: infantryunit, enums.Unit.ARMORED: armoredunit, enums.Unit.AIR_FORCE: airforceunit}
+        infantryunitlvl1 = pygame.image.load("sprites/enemies/soldier0.png")
+        infantryunitlvl2 = pygame.image.load("sprites/enemies/soldier1.png")
+        infantryunitlvl3 = pygame.image.load("sprites/enemies/soldier2.png")
+        infantryunitlvl4 = pygame.image.load("sprites/enemies/soldier3.png")
+        armoredunitlvl1 = pygame.image.load("sprites/enemies/tank0.png")
+        armoredunitlvl2 = pygame.image.load("sprites/enemies/tank1.png")
+        airforceunitlvl1 = pygame.image.load("sprites/enemies/plane0.png")
+        airforceunitlvl2 = pygame.image.load("sprites/enemies/plane1.png")
+        return {enums.UnitSubtype.INFANTRY_LVL1: infantryunitlvl1, enums.UnitSubtype.INFANTRY_LVL2: infantryunitlvl2,
+                enums.UnitSubtype.INFANTRY_LVL3: infantryunitlvl3, enums.UnitSubtype.INFANTRY_LVL4: infantryunitlvl4,
+                enums.UnitSubtype.ARMORED_LVL1: armoredunitlvl1, enums.UnitSubtype.ARMORED_LVL2: armoredunitlvl2,
+                enums.UnitSubtype.AIR_FORCE_LVL1: airforceunitlvl1, enums.UnitSubtype.AIR_FORCE_LVL2: airforceunitlvl2}
 
     def make_tower_imgs(self):
         """
@@ -157,7 +165,7 @@ class Art():
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
             self.screen.blit(
-                pygame.transform.rotate(self.unit_imgs[unit.get_unit_type()], utils.direction2angle(unit.get_direction())), unit_pos
+                pygame.transform.rotate(self.unit_imgs[unit.get_unit_subtype()], utils.direction2angle(unit.get_direction())), unit_pos
             )
         for unit in self.game.units:
             unit_pos = screenpos.unit_pos_in_scrn(unit.cur_pos, unit.next_pos, unit.move_progress)
