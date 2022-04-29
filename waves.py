@@ -12,7 +12,9 @@ class Wave:
     """
 
     unit_type_converter = {
-        "infantry" : enums.Unit.INFANTRY, "armored" : enums.Unit.ARMORED, "air_force" : enums.Unit.AIR_FORCE
+        "infantry_lvl1" : enums.UnitSubtype.INFANTRY_LVL1, "infantry_lvl2" : enums.UnitSubtype.INFANTRY_LVL2, "infantry_lvl3" : enums.UnitSubtype.INFANTRY_LVL3,
+        "infantry_lvl4" : enums.UnitSubtype.INFANTRY_LVL4, "armored_lvl1" : enums.UnitSubtype.ARMORED_LVL1, "armored_lvl2" : enums.UnitSubtype.ARMORED_LVL2,
+        "air_force_lvl1" : enums.UnitSubtype.AIR_FORCE_LVL1, "air_force_lvl2" : enums.UnitSubtype.AIR_FORCE_LVL2
     }
 
     def __init__(self, wave_info, game):
