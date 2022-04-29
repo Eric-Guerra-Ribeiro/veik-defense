@@ -1,4 +1,3 @@
-from pickle import TRUE
 import pygame
 import random
 
@@ -230,6 +229,8 @@ class Art():
         self.screen.blit(self.menu_background, (0, 0))
         text = self.big_font.render('VEIK DEFENSE', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
+        selected_map_text = self.regular_font.render(f'Selected map: {self.game.selected_map + 1}', True, pgc.RED)
+        self.screen.blit(selected_map_text, ((pgc.WINDOW_WIDTH - selected_map_text.get_width())/2, pgc.WINDOW_HEIGHT - selected_map_text.get_height()))
 
     def draw_win(self):
         """
@@ -249,9 +250,9 @@ class Art():
         """
         text = self.big_font.render('TUTORIAL', True, pgc.RED)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(2*text.get_height())))
-        text = self.big_font.render('SE VIRA BIXO!', True, pgc.BLUE)
+        text = self.big_font.render('Read README.md', True, pgc.YELLOW)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2))
-        text = self.regular_font.render("Press any key to restart", True, pgc.BLUE)
+        text = self.regular_font.render("Press any key to return to menu", True, pgc.YELLOW)
         self.screen.blit(text, ((pgc.WINDOW_WIDTH - text.get_width())/2 ,(pgc.WINDOW_HEIGHT - text.get_height())/2 + 2*text.get_height()))
 
 
@@ -264,7 +265,7 @@ def BackgroundMusic():
 def create_text_box(text):
     img = pygame.Surface((3.5 * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
     regular_font = pygame.font.Font('freesansbold.ttf', 40)
-    txt = regular_font.render(text, TRUE, pgc.YELLOW)
+    txt = regular_font.render(text, True, pgc.YELLOW)
     img.blit(txt, (0,0))
     return img
 
@@ -272,7 +273,8 @@ def create_surface(type, cls):
     """
     Create button surface
     """
-    img = pygame.Surface((2.75 * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
+    width = pgc.TOWER_BUTTON_WIDTH
+    img = pygame.Surface((width * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
     regular_font = pygame.font.Font('freesansbold.ttf', 20)
     if type == enums.ResourceFactory.COAL_FACTORY:
         img.blit(pygame.image.load("sprites/general/factory.png"), (0, 0))
@@ -291,8 +293,8 @@ def create_surface(type, cls):
         text1 = regular_font.render(f"D: {cls.dmg:.1f} F: {cls.fire_rate * pgc.FREQUENCY:.1f}", True, pgc.RED)
         text2 = regular_font.render(f"${cls.price}", True, pgc.YELLOW)
 
-    img.blit(text1, (pgc.GRID_SIZE + (1.75*pgc.GRID_SIZE - text1.get_width())/2, (pgc.GRID_SIZE/2 - text1.get_height())/2))
-    img.blit(text2, (pgc.GRID_SIZE + (1.75*pgc.GRID_SIZE - text2.get_width())/2, pgc.GRID_SIZE/2 + (pgc.GRID_SIZE/2 - text2.get_height())/2))
+    img.blit(text1, (pgc.GRID_SIZE + ((width - 1)*pgc.GRID_SIZE - text1.get_width())/2, (pgc.GRID_SIZE/2 - text1.get_height())/2))
+    img.blit(text2, (pgc.GRID_SIZE + ((width - 1)*pgc.GRID_SIZE - text2.get_width())/2, pgc.GRID_SIZE/2 + (pgc.GRID_SIZE/2 - text2.get_height())/2))
     return img
 
 

@@ -16,11 +16,10 @@ class Button:
     """
     Creates a button on screen.
     """
-    def __init__(self, pos, size, content, action, game):
+    def __init__(self, pos, content, action, game):
         self.pos = pos
-        self.size = size
-        self._content = pygame.Surface(size, pygame.SRCALPHA)
-        self._content.blit(content, ((size[0]-content.get_size()[0])//2, (size[1]-content.get_size()[1])//2))
+        self.size = content.get_size()
+        self._content = content
         self.action = action
         self.game = game
     
@@ -94,40 +93,34 @@ class Input:
         buttons = {
             enums.GameState.MENU : [
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 - 2*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CAMPAIGN"),
-                       lambda _game: utils.begin_campaign(_game), game),
+                       art.menu_button_content("CAMPAIGN"), lambda _game: utils.begin_campaign(_game), game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 - 1*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CHALLENGE"),
-                       lambda _game: utils.begin_challenge(_game), game),
+                       art.menu_button_content("CHALLENGE"), lambda _game: utils.begin_challenge(_game), game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 0*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("CHANGE MAP"),
-                       lambda _game: gamecontroller.GameController.next_map(_game), game),
+                       art.menu_button_content("CHANGE MAP"), lambda _game: gamecontroller.GameController.next_map(_game), game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 1*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("TUTORIAL"),
-                       lambda _game: utils.begin_tutorial(_game), game)
+                       art.menu_button_content("TUTORIAL"), lambda _game: utils.begin_tutorial(_game), game)
             ],
             enums.GameState.PAUSED : [
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 - 1*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("UNPAUSE", True),
-                       lambda _game: gamecontroller.GameController.unpause(_game), game),
+                       art.menu_button_content("UNPAUSE", True), lambda _game: gamecontroller.GameController.unpause(_game), game),
                 Button(((pgc.WINDOW_WIDTH - pgc.MENU_BUTTON_WIDTH)/2, pgc.WINDOW_HEIGHT/2 + 0*pgc.MENU_BUTTON_HEIGHT),
-                       (pgc.MENU_BUTTON_WIDTH, pgc.MENU_BUTTON_HEIGHT), art.menu_button_content("MENU", True),
-                       lambda _game: gamecontroller.GameController.reset(_game), game),
+                       art.menu_button_content("MENU", True), lambda _game: gamecontroller.GameController.reset(_game), game),
             ],
             enums.GameState.PLAYING : [
-                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,100), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.MACHINE_GUN_LVL1, MachineGunLvl1),
+                Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, pgc.MAP_CORNER_POS[1]), create_surface(enums.Tower.MACHINE_GUN_LVL1, MachineGunLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.MACHINE_GUN_LVL1), game),
-                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,200), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.CANNON_LVL1, CannonLvl1),
+                Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, 2*pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE), create_surface(enums.Tower.CANNON_LVL1, CannonLvl1),
                         lambda _game: utils.select_tower(_game, enums.Tower.CANNON_LVL1), game),
-                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,300), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.MISSILE_LVL1, MissileLvl1),
+                Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, 3*pgc.MAP_CORNER_POS[1] + 2*pgc.GRID_SIZE), create_surface(enums.Tower.MISSILE_LVL1, MissileLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.MISSILE_LVL1), game),
-                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,400), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.Tower.ANTI_TANK_LVL1, AntiTankLvl1),
+                Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, 4*pgc.MAP_CORNER_POS[1] + 3*pgc.GRID_SIZE), create_surface(enums.Tower.ANTI_TANK_LVL1, AntiTankLvl1),
                        lambda _game: utils.select_tower(_game, enums.Tower.ANTI_TANK_LVL1), game),
-                Button((pgc.WINDOW_WIDTH - 3.25 * pgc.GRID_SIZE,500), (2.75*pgc.GRID_SIZE, pgc.GRID_SIZE), create_surface(enums.ResourceFactory.COAL_FACTORY, CoalFactory),
+                Button(((pgc.MAP_CORNER_POS[0] + pgc.GRID_SIZE*(gc.MAP_WIDTH - pgc.TOWER_BUTTON_WIDTH) + pgc.WINDOW_WIDTH)/2, 5*pgc.MAP_CORNER_POS[1] + 4*pgc.GRID_SIZE), create_surface(enums.ResourceFactory.COAL_FACTORY, CoalFactory),
                        lambda _game: utils.select_tower(_game, enums.ResourceFactory.COAL_FACTORY), game),
-                Button((pgc.MAP_CORNER_POS[0] + 2.5 * pgc.GRID_SIZE, pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE*gc.MAP_HEIGHT + 20), (3.5*pgc.GRID_SIZE, pgc.GRID_SIZE), create_text_box('UPDATE'),
+                Button((pgc.MAP_CORNER_POS[0] + 2.5 * pgc.GRID_SIZE, pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE*gc.MAP_HEIGHT + 20), create_text_box('UPDATE'),
                        lambda _game: utils.select_update(_game), game),
-                Button((pgc.MAP_CORNER_POS[0] +  10 * pgc.GRID_SIZE,pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE*gc.MAP_HEIGHT + 20), (3.5*pgc.GRID_SIZE, pgc.GRID_SIZE), create_text_box('DESTROY'),
+                Button((pgc.MAP_CORNER_POS[0] +  10 * pgc.GRID_SIZE,pgc.MAP_CORNER_POS[1] + pgc.GRID_SIZE*gc.MAP_HEIGHT + 20), create_text_box('DESTROY'),
                        lambda _game: utils.select_deleting(_game), game)
             ]
         }
@@ -150,7 +143,7 @@ class Input:
             if (self.game.game_state == enums.GameState.PLAYING
                 or self.game.game_state == enums.GameState.GRACE_PERIOD):
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE or pygame.K_ESCAPE:
                         self.game.pause()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for board in self.boards[enums.GameState.PLAYING]:
@@ -168,7 +161,7 @@ class Input:
                         button.press(pygame.mouse.get_pos())
             elif self.game.game_state == enums.GameState.PAUSED:
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE or pygame.K_ESCAPE:
                         self.game.unpause()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for button in self.buttons[enums.GameState.PAUSED]:
