@@ -1,6 +1,7 @@
 import json
 import random
 import itertools
+import math
 
 import enums
 import pygameconstants as pgc
@@ -39,7 +40,7 @@ class Wave:
         """
         Spawns troops at the right rate and probability
         """
-        self.spawn_progress += self.spawn_rate
+        self.spawn_progress += self.spawn_rate*self.spawn_boost()
         while self.spawn_progress >= 1:
             self.spawn_progress -= 1
             self.game.spawn_unit(self.choose_unit())
@@ -60,6 +61,12 @@ class Wave:
             if unit[1] >= probability:
                 return unit[0]
         return self.units[-1][0]
+    
+    def spawn_boost(self):
+        """
+        Gives a boost to spawn rate according to the number of spawned units.
+        """
+        return 1 + 0.5*math.log10(1 + self.spawned_units)
 
 
 class WaveController:
