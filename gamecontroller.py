@@ -21,6 +21,7 @@ class GameController:
         self.bf_map = battlefieldmap.BattleFieldMap()
         self.units = []
         self.towers = []
+        self.resource_factories = []
         self.selected_tower = enums.Tower.MACHINE_GUN_LVL1
         self.resources = BASE_RESOURCE
         self._game_state = enums.GameState.GRACE_PERIOD
@@ -37,7 +38,9 @@ class GameController:
         for tower in self.towers:
             tower.find_target(self.units)
             tower.shoot()
-            
+        for resource_factory in self.resource_factories:
+            resource_factory.produce()
+            self.increase_resources(resource_factory.collect())
         if not self.bf_map.ally_camp.alive:
             self.go = True
     

@@ -1,5 +1,6 @@
 import enums
 import tower
+import resourceFactory
 
 def valid_index(index, list_dim):
     """
@@ -48,6 +49,10 @@ def add_tower(map_cell, game):
             game.ocupy_cells(map_cell, 1)
             game.towers.append(tower.MissileLvl1(game.bf_map, map_cell))
             game.decrease_resources(tower.MissileLvl1.price)
+        elif game.selected_tower == enums.ResourceFactory.COAL_FACTORY and game.resources >= resourceFactory.CoalFactory.price:
+            game.ocupy_cells(map_cell, 1)
+            game.resource_factories.append(resourceFactory.CoalFactory(game.bf_map, map_cell))
+            game.decrease_resources(resourceFactory.CoalFactory.price)
 
 def update_tower(map_cell, game):
     "Updates a tower in map"
@@ -68,6 +73,18 @@ def update_tower(map_cell, game):
                 elif curr_tower.tower_type == enums.Tower.MISSILE_LVL1:
                     game.towers[index] = tower.MissileLvl2(game.bf_map, map_cell)
 
+                game.decrease_resources(price)
+                break
+
+def update_factory(map_cell, game):
+    "Updates a factory in map"
+    if not game.are_cells_empty(map_cell, 1):
+        for index, curr_factory in enumerate(game.resource_factories):
+            if curr_factory.pos == map_cell and game.resources >= curr_factory.update_price:
+                price = curr_factory.update_price
+                if curr_factory.factory_type == enums.ResourceFactory.COAL_FACTORY:
+                    game.resource_factories[index] = resourceFactory.NuclearPlant(game.bf_map, map_cell)
+                
                 game.decrease_resources(price)
                 break
 
