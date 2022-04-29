@@ -93,3 +93,9 @@ Another important idea is using inheritance and abstract classes. Abstract class
  - ```unit.py```: Abstract class for an enemy unit and its children.
  - ```utils.py```: Miscelleanous functions that help with the implementation.
  - ```waves.py```: Classes for waves and one that controlls the change of waves.
+
+## Credits
+Made by:
+- Eric Guerra Ribeiro
+- Marcelo Buga Martins da Silva
+- Mateus Henrique Cristo de Melo
