@@ -9,9 +9,9 @@ def valid_index(index, list_dim):
     considering a list of dimensions list_dim.
     """
     for i, ind in enumerate(index):
-        if 0<= ind < list_dim[i]:
-            return True
-    return False
+        if not (0<= ind < list_dim[i]):
+            return False
+    return True
 
 
 def direction2angle(direction):
