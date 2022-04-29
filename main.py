@@ -10,19 +10,6 @@ def main():
     """
     Main function for the Veik Defense game, including its main loop.
     """
-
-    def show_go_screen():
-        arts.draw_game_over()
-        waiting = True
-        while waiting:
-            clock.tick(pgc.FREQUENCY)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.KEYUP:
-                    waiting = False
-
-
     pygame.init()
     pygame.display.set_caption("Veik Defense")
     clock = pygame.time.Clock()

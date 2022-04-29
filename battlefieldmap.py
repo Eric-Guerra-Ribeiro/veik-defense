@@ -1,3 +1,5 @@
+import json
+
 import enums
 import gameconstants as gc
 import utils
@@ -7,21 +9,15 @@ class BattleFieldMap:
     """
     Map of the battlefield.
     """
-    def __init__(self):
+    def __init__(self, map_json):
         self.width = gc.MAP_WIDTH
         self.height = gc.MAP_HEIGHT
-        # Default map grid for now
-        # TODO Improve this
-        paths_pos = [
-            (7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (3, 2), (3, 3), (3, 4),
-            (4, 4), (5, 4), (6, 4), (6, 5), (6, 6), (5, 6), (4, 6), (3, 6),
-            (2, 6), (1, 6), (1, 7), (1, 8), (1, 9), (2, 9), (3, 9), (4, 9),
-            (5, 9), (6, 9), (7, 9), (7, 10), (7, 11), (7, 12), (7,12), (7,13),
-            (7, 14), (6, 14), (5, 14), (4, 14), (3, 14), (3, 13), (3, 12), (2, 12), (1, 12)
-        ]
-        self.ally_camp_pos = (0, 12)
+        with open(map_json, "r") as json_file:
+            map_dict = json.load(json_file)
+        paths_pos = map_dict["paths"]
+        self.ally_camp_pos = tuple(map_dict["ally_camp"])
         self.ally_camp = AllyCamp(self.ally_camp_pos)
-        self.enemy_camp_pos = (7, 0)
+        self.enemy_camp_pos = tuple(map_dict["enemy_camp"])
 
         self.grid = [self.width*[enums.Terrain.GRASS] for _ in range(self.height)]
         self.is_cell_empty = [self.width*[True] for _ in range(self.height)]
