@@ -264,7 +264,8 @@ def create_surface(type, cls):
     """
     Create button surface
     """
-    img = pygame.Surface((2.75 * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
+    width = pgc.TOWER_BUTTON_WIDTH
+    img = pygame.Surface((width * pgc.GRID_SIZE, pgc.GRID_SIZE), pygame.SRCALPHA)
     regular_font = pygame.font.Font('freesansbold.ttf', 20)
     if type == enums.ResourceFactory.COAL_FACTORY:
         img.blit(pygame.image.load("sprites/general/factory.png"), (0, 0))
@@ -283,8 +284,8 @@ def create_surface(type, cls):
         text1 = regular_font.render(f"D: {cls.dmg:.1f} F: {cls.fire_rate * pgc.FREQUENCY:.1f}", True, pgc.RED)
         text2 = regular_font.render(f"${cls.price}", True, pgc.YELLOW)
 
-    img.blit(text1, (pgc.GRID_SIZE + (1.75*pgc.GRID_SIZE - text1.get_width())/2, (pgc.GRID_SIZE/2 - text1.get_height())/2))
-    img.blit(text2, (pgc.GRID_SIZE + (1.75*pgc.GRID_SIZE - text2.get_width())/2, pgc.GRID_SIZE/2 + (pgc.GRID_SIZE/2 - text2.get_height())/2))
+    img.blit(text1, (pgc.GRID_SIZE + ((width - 1)*pgc.GRID_SIZE - text1.get_width())/2, (pgc.GRID_SIZE/2 - text1.get_height())/2))
+    img.blit(text2, (pgc.GRID_SIZE + ((width - 1)*pgc.GRID_SIZE - text2.get_width())/2, pgc.GRID_SIZE/2 + (pgc.GRID_SIZE/2 - text2.get_height())/2))
     return img
 
 
